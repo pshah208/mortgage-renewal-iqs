@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "description": "Clean-room rebuild into an empty resource group. Creates everything: the Foundry platform trio (storage, key vault, app insights), the Foundry account + project + both model deployments, AI Search, and a Fabric capacity - all co-located in one resource group, unlike the live estate. Set fabricAdminMembers and agentPrincipalId to real Entra object IDs first (az ad signed-in-user show --query id -o tsv)."
+  },
+  "parameters": {
+    "workload":        { "value": "mtgrenewal" },
+    "environmentName": { "value": "dev" },
+    "location":        { "value": "eastus" },
+
+    "createSearch":        { "value": true },
+    "searchSku":           { "value": "basic" },
+    "searchSemanticTier":  { "value": "free" },
+    "searchEnableAadAuth": { "value": true },
+
+    "createFoundry":           { "value": true },
+    "foundryProjectName":      { "value": "proj-conceirge" },
+    "foundryDisableLocalAuth": { "value": true },
+
+    "deployModel":         { "value": true },
+    "modelDeploymentName": { "value": "gpt-5.4" },
+    "modelName":           { "value": "gpt-5.4" },
+    "modelVersion":        { "value": "" },
+    "modelCapacity":       { "value": 100 },
+
+    "deployEmbeddingModel":    { "value": true },
+    "embeddingDeploymentName": { "value": "text-embedding-3-small" },
+    "embeddingModelName":      { "value": "text-embedding-3-small" },
+    "embeddingModelVersion":   { "value": "" },
+    "embeddingCapacity":       { "value": 120 },
+
+    "manageFoundryPlatform":    { "value": true },
+    "createFoundryStorage":     { "value": true },
+    "createFoundryKeyVault":    { "value": true },
+    "createFoundryAppInsights": { "value": true },
+    "attachUserOwnedStorage":   { "value": true },
+
+    "createFabricCapacity": { "value": true },
+    "fabricCapacityName":   { "value": "fabmtgrenewaldev" },
+    "fabricSkuName":        { "value": "F2" },
+    "fabricAdminMembers":   { "value": [ "REPLACE-WITH-ENTRA-OBJECT-ID" ] },
+
+    "agentPrincipalId":   { "value": "REPLACE-WITH-ENTRA-OBJECT-ID" },
+    "agentPrincipalType": { "value": "User" }
+  }
+}

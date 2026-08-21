@@ -1,0 +1,1768 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.42.1.51946",
+      "templateHash": "6529196888211787174"
+    }
+  },
+  "parameters": {
+    "workload": {
+      "type": "string",
+      "defaultValue": "mtgrenewal",
+      "metadata": {
+        "description": "Workload name used in CAF-style resource names."
+      }
+    },
+    "environmentName": {
+      "type": "string",
+      "defaultValue": "dev",
+      "allowedValues": [
+        "dev",
+        "test",
+        "prod"
+      ],
+      "metadata": {
+        "description": "Environment: dev | test | prod."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Azure region for resources created in THIS resource group."
+      }
+    },
+    "extraTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Additional tags merged onto every resource."
+      }
+    },
+    "createSearch": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Create a new Azure AI Search service. False = reference an existing one."
+      }
+    },
+    "searchServiceName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Search service name. Required when createSearch = false."
+      }
+    },
+    "searchResourceGroupName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Resource group holding the Search service. Blank = this resource group. The live service is in rg-mortgage-iq."
+      }
+    },
+    "searchLocation": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Region for a newly created Search service. Blank = same as location. The live service is in canadacentral."
+      }
+    },
+    "searchSku": {
+      "type": "string",
+      "defaultValue": "basic",
+      "allowedValues": [
+        "free",
+        "basic",
+        "standard",
+        "standard2",
+        "standard3"
+      ],
+      "metadata": {
+        "description": "Search SKU."
+      }
+    },
+    "searchSemanticTier": {
+      "type": "string",
+      "defaultValue": "free",
+      "allowedValues": [
+        "free",
+        "standard"
+      ],
+      "metadata": {
+        "description": "Semantic ranker tier. MUST NOT be \"disabled\" - the agent issues semantic queries."
+      }
+    },
+    "searchEnableAadAuth": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Allow Entra auth alongside API keys on a newly created Search service. The live service is apiKeyOnly."
+      }
+    },
+    "createFoundry": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Create a new Foundry (AIServices) account. False = reference an existing one."
+      }
+    },
+    "foundryAccountName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Foundry account name. Required when createFoundry = false."
+      }
+    },
+    "foundryProjectName": {
+      "type": "string",
+      "defaultValue": "proj-conceirge",
+      "metadata": {
+        "description": "Foundry project name."
+      }
+    },
+    "foundryDisableLocalAuth": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Disable API-key auth on the Foundry account, forcing Entra tokens. Live estate has this ON."
+      }
+    },
+    "deployModel": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Deploy the reasoning model. False if it already exists or quota is short."
+      }
+    },
+    "modelDeploymentName": {
+      "type": "string",
+      "defaultValue": "gpt-5.4",
+      "metadata": {
+        "description": "Model deployment name the agent calls."
+      }
+    },
+    "modelName": {
+      "type": "string",
+      "defaultValue": "gpt-5.4",
+      "metadata": {
+        "description": "Model name."
+      }
+    },
+    "modelVersion": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Model version. Blank = platform default."
+      }
+    },
+    "modelCapacity": {
+      "type": "int",
+      "defaultValue": 100,
+      "metadata": {
+        "description": "Model capacity in thousands of tokens per minute."
+      }
+    },
+    "deployEmbeddingModel": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Deploy the embedding model used to vectorise the Foundry IQ policy corpus."
+      }
+    },
+    "embeddingDeploymentName": {
+      "type": "string",
+      "defaultValue": "text-embedding-3-small",
+      "metadata": {
+        "description": "Embedding deployment name."
+      }
+    },
+    "embeddingModelName": {
+      "type": "string",
+      "defaultValue": "text-embedding-3-small",
+      "metadata": {
+        "description": "Embedding model name."
+      }
+    },
+    "embeddingModelVersion": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Embedding model version. Blank = platform default."
+      }
+    },
+    "embeddingSku": {
+      "type": "string",
+      "defaultValue": "GlobalStandard",
+      "allowedValues": [
+        "GlobalStandard",
+        "DataZoneStandard",
+        "Standard"
+      ],
+      "metadata": {
+        "description": "Embedding deployment SKU. The live deployment is regional Standard, not GlobalStandard."
+      }
+    },
+    "embeddingCapacity": {
+      "type": "int",
+      "defaultValue": 120,
+      "metadata": {
+        "description": "Embedding capacity in thousands of tokens per minute."
+      }
+    },
+    "raiPolicyName": {
+      "type": "string",
+      "defaultValue": "Microsoft.DefaultV2",
+      "metadata": {
+        "description": "Responsible AI policy applied to the model deployment."
+      }
+    },
+    "versionUpgradeOption": {
+      "type": "string",
+      "defaultValue": "OnceNewDefaultVersionAvailable",
+      "allowedValues": [
+        "OnceNewDefaultVersionAvailable",
+        "OnceCurrentVersionExpired",
+        "NoAutoUpgrade"
+      ],
+      "metadata": {
+        "description": "Version upgrade behaviour for the model deployment."
+      }
+    },
+    "manageFoundryPlatform": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Manage the storage / key vault / app insights trio that backs the Foundry account."
+      }
+    },
+    "createFoundryStorage": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Create the Foundry storage account. False = reference an existing one."
+      }
+    },
+    "foundryStorageAccountName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Storage account name backing the Foundry account (user-owned storage)."
+      }
+    },
+    "createFoundryKeyVault": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Create the Foundry key vault. False = reference an existing one."
+      }
+    },
+    "foundryKeyVaultName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Key vault name backing the Foundry account."
+      }
+    },
+    "createFoundryAppInsights": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Create the Foundry Application Insights component. False = reference an existing one."
+      }
+    },
+    "foundryAppInsightsName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Application Insights component name backing the Foundry account."
+      }
+    },
+    "attachUserOwnedStorage": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Attach the storage account to the Foundry account as user-owned storage. Live estate has this ON."
+      }
+    },
+    "createFabricCapacity": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Create a Microsoft Fabric capacity. False = use an existing capacity."
+      }
+    },
+    "fabricCapacityName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Fabric capacity name. Required when createFabricCapacity = true."
+      }
+    },
+    "fabricResourceGroupName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Resource group holding the Fabric capacity. Blank = this resource group. The live capacity is in rg-Fabric."
+      }
+    },
+    "fabricLocation": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Region for a newly created Fabric capacity. Blank = same as location. The live capacity is in centralus."
+      }
+    },
+    "fabricSkuName": {
+      "type": "string",
+      "defaultValue": "F2",
+      "allowedValues": [
+        "F2",
+        "F4",
+        "F8",
+        "F16",
+        "F32",
+        "F64"
+      ],
+      "metadata": {
+        "description": "Fabric SKU."
+      }
+    },
+    "fabricAdminMembers": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Entra object IDs or UPNs set as Fabric capacity admins. Required when createFabricCapacity = true."
+      }
+    },
+    "agentPrincipalId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Entra object ID of the principal that will run the agent. Blank = skip role assignments."
+      }
+    },
+    "agentPrincipalType": {
+      "type": "string",
+      "defaultValue": "User",
+      "allowedValues": [
+        "User",
+        "Group",
+        "ServicePrincipal"
+      ],
+      "metadata": {
+        "description": "Principal type for the role assignments."
+      }
+    }
+  },
+  "variables": {
+    "tags": "[union(createObject('workload', parameters('workload'), 'environment', parameters('environmentName'), 'solution', 'mortgage-renewal-concierge', 'dataClassification', 'synthetic-demo-data', 'managedBy', 'bicep'), parameters('extraTags'))]",
+    "suffix": "[uniqueString(resourceGroup().id)]",
+    "resolvedSearchName": "[if(parameters('createSearch'), toLower(format('srch-{0}-{1}-{2}', parameters('workload'), parameters('environmentName'), variables('suffix'))), parameters('searchServiceName'))]",
+    "resolvedFoundryName": "[if(parameters('createFoundry'), toLower(format('ai-{0}-{1}-{2}', parameters('workload'), parameters('environmentName'), variables('suffix'))), parameters('foundryAccountName'))]",
+    "resolvedSearchRg": "[if(empty(parameters('searchResourceGroupName')), resourceGroup().name, parameters('searchResourceGroupName'))]",
+    "resolvedSearchLocation": "[if(empty(parameters('searchLocation')), parameters('location'), parameters('searchLocation'))]",
+    "resolvedFabricRg": "[if(empty(parameters('fabricResourceGroupName')), resourceGroup().name, parameters('fabricResourceGroupName'))]",
+    "resolvedFabricLocation": "[if(empty(parameters('fabricLocation')), parameters('location'), parameters('fabricLocation'))]",
+    "searchIsLocal": "[equals(variables('resolvedSearchRg'), resourceGroup().name)]",
+    "fabricIsLocal": "[equals(variables('resolvedFabricRg'), resourceGroup().name)]",
+    "resolvedStorageName": "[if(empty(parameters('foundryStorageAccountName')), toLower(format('st{0}{1}{2}', parameters('workload'), parameters('environmentName'), variables('suffix'))), parameters('foundryStorageAccountName'))]",
+    "resolvedKeyVaultName": "[if(empty(parameters('foundryKeyVaultName')), toLower(format('kv-{0}-{1}-{2}', parameters('workload'), parameters('environmentName'), variables('suffix'))), parameters('foundryKeyVaultName'))]",
+    "resolvedAppInsightsName": "[if(empty(parameters('foundryAppInsightsName')), toLower(format('appi-{0}-{1}-{2}', parameters('workload'), parameters('environmentName'), variables('suffix'))), parameters('foundryAppInsightsName'))]",
+    "foundryStorageId": "[resourceId('Microsoft.Storage/storageAccounts', variables('resolvedStorageName'))]",
+    "userOwnedStorageIds": "[if(and(parameters('manageFoundryPlatform'), parameters('attachUserOwnedStorage')), createArray(variables('foundryStorageId')), createArray())]"
+  },
+  "resources": [
+    {
+      "condition": "[and(not(parameters('createFoundry')), parameters('deployModel'))]",
+      "type": "Microsoft.CognitiveServices/accounts/deployments",
+      "apiVersion": "2025-04-01-preview",
+      "name": "[format('{0}/{1}', parameters('foundryAccountName'), parameters('modelDeploymentName'))]",
+      "sku": {
+        "name": "GlobalStandard",
+        "capacity": "[parameters('modelCapacity')]"
+      },
+      "properties": {
+        "model": "[union(createObject('format', 'OpenAI', 'name', parameters('modelName')), if(empty(parameters('modelVersion')), createObject(), createObject('version', parameters('modelVersion'))))]",
+        "raiPolicyName": "[parameters('raiPolicyName')]",
+        "versionUpgradeOption": "[parameters('versionUpgradeOption')]"
+      }
+    },
+    {
+      "condition": "[and(not(parameters('createFoundry')), parameters('deployEmbeddingModel'))]",
+      "type": "Microsoft.CognitiveServices/accounts/deployments",
+      "apiVersion": "2025-04-01-preview",
+      "name": "[format('{0}/{1}', parameters('foundryAccountName'), parameters('embeddingDeploymentName'))]",
+      "sku": {
+        "name": "[parameters('embeddingSku')]",
+        "capacity": "[parameters('embeddingCapacity')]"
+      },
+      "properties": {
+        "model": "[union(createObject('format', 'OpenAI', 'name', parameters('embeddingModelName')), if(empty(parameters('embeddingModelVersion')), createObject(), createObject('version', parameters('embeddingModelVersion'))))]",
+        "raiPolicyName": "[parameters('raiPolicyName')]",
+        "versionUpgradeOption": "[parameters('versionUpgradeOption')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.CognitiveServices/accounts/deployments', parameters('foundryAccountName'), parameters('modelDeploymentName'))]"
+      ]
+    },
+    {
+      "condition": "[parameters('manageFoundryPlatform')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "foundry-platform",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "createStorage": {
+            "value": "[parameters('createFoundryStorage')]"
+          },
+          "storageAccountName": {
+            "value": "[variables('resolvedStorageName')]"
+          },
+          "createKeyVault": {
+            "value": "[parameters('createFoundryKeyVault')]"
+          },
+          "keyVaultName": {
+            "value": "[variables('resolvedKeyVaultName')]"
+          },
+          "createAppInsights": {
+            "value": "[parameters('createFoundryAppInsights')]"
+          },
+          "appInsightsName": {
+            "value": "[variables('resolvedAppInsightsName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "tags": {
+            "value": "[variables('tags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.42.1.51946",
+              "templateHash": "14289668819689739614"
+            }
+          },
+          "parameters": {
+            "createStorage": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Create the storage account. False = reference an existing one."
+              }
+            },
+            "storageAccountName": {
+              "type": "string",
+              "metadata": {
+                "description": "Storage account name."
+              }
+            },
+            "createKeyVault": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Create the key vault. False = reference an existing one."
+              }
+            },
+            "keyVaultName": {
+              "type": "string",
+              "metadata": {
+                "description": "Key vault name."
+              }
+            },
+            "createAppInsights": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Create the Application Insights component. False = reference an existing one."
+              }
+            },
+            "appInsightsName": {
+              "type": "string",
+              "metadata": {
+                "description": "Application Insights component name."
+              }
+            },
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region."
+              }
+            },
+            "tags": {
+              "type": "object",
+              "metadata": {
+                "description": "Resource tags."
+              }
+            },
+            "tenantId": {
+              "type": "string",
+              "defaultValue": "[subscription().tenantId]",
+              "metadata": {
+                "description": "Entra tenant ID for the key vault."
+              }
+            },
+            "keyVaultRetentionDays": {
+              "type": "int",
+              "defaultValue": 7,
+              "minValue": 7,
+              "maxValue": 90,
+              "metadata": {
+                "description": "Key vault soft-delete retention in days."
+              }
+            }
+          },
+          "resources": [
+            {
+              "condition": "[parameters('createStorage')]",
+              "type": "Microsoft.Storage/storageAccounts",
+              "apiVersion": "2023-05-01",
+              "name": "[parameters('storageAccountName')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "sku": {
+                "name": "Standard_LRS"
+              },
+              "kind": "StorageV2",
+              "properties": {
+                "minimumTlsVersion": "TLS1_2",
+                "supportsHttpsTrafficOnly": true,
+                "allowSharedKeyAccess": false,
+                "allowBlobPublicAccess": false,
+                "publicNetworkAccess": "Disabled",
+                "networkAcls": {
+                  "bypass": "AzureServices",
+                  "defaultAction": "Deny"
+                }
+              }
+            },
+            {
+              "condition": "[parameters('createKeyVault')]",
+              "type": "Microsoft.KeyVault/vaults",
+              "apiVersion": "2023-07-01",
+              "name": "[parameters('keyVaultName')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "properties": {
+                "tenantId": "[parameters('tenantId')]",
+                "sku": {
+                  "family": "A",
+                  "name": "standard"
+                },
+                "enableRbacAuthorization": true,
+                "enableSoftDelete": true,
+                "softDeleteRetentionInDays": "[parameters('keyVaultRetentionDays')]",
+                "enablePurgeProtection": true,
+                "publicNetworkAccess": "Disabled",
+                "networkAcls": {
+                  "bypass": "AzureServices",
+                  "defaultAction": "Deny"
+                }
+              }
+            },
+            {
+              "condition": "[parameters('createAppInsights')]",
+              "type": "Microsoft.Insights/components",
+              "apiVersion": "2020-02-02",
+              "name": "[parameters('appInsightsName')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "kind": "web",
+              "properties": {
+                "Application_Type": "web",
+                "IngestionMode": "LogAnalytics"
+              }
+            }
+          ],
+          "outputs": {
+            "storageAccountName": {
+              "type": "string",
+              "value": "[parameters('storageAccountName')]"
+            },
+            "storageAccountId": {
+              "type": "string",
+              "value": "[if(parameters('createStorage'), resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')))]"
+            },
+            "keyVaultName": {
+              "type": "string",
+              "value": "[parameters('keyVaultName')]"
+            },
+            "keyVaultId": {
+              "type": "string",
+              "value": "[if(parameters('createKeyVault'), resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName')), resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName')))]"
+            },
+            "appInsightsName": {
+              "type": "string",
+              "value": "[parameters('appInsightsName')]"
+            },
+            "appInsightsId": {
+              "type": "string",
+              "value": "[if(parameters('createAppInsights'), resourceId('Microsoft.Insights/components', parameters('appInsightsName')), resourceId('Microsoft.Insights/components', parameters('appInsightsName')))]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "condition": "[and(parameters('createSearch'), variables('searchIsLocal'))]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "search",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "name": {
+            "value": "[variables('resolvedSearchName')]"
+          },
+          "location": {
+            "value": "[variables('resolvedSearchLocation')]"
+          },
+          "tags": {
+            "value": "[variables('tags')]"
+          },
+          "sku": {
+            "value": "[parameters('searchSku')]"
+          },
+          "semanticSearch": {
+            "value": "[parameters('searchSemanticTier')]"
+          },
+          "enableAadAuth": {
+            "value": "[parameters('searchEnableAadAuth')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.42.1.51946",
+              "templateHash": "14963937147096694098"
+            }
+          },
+          "parameters": {
+            "name": {
+              "type": "string",
+              "metadata": {
+                "description": "Name of the search service."
+              }
+            },
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region."
+              }
+            },
+            "tags": {
+              "type": "object",
+              "metadata": {
+                "description": "Resource tags."
+              }
+            },
+            "sku": {
+              "type": "string",
+              "defaultValue": "basic",
+              "allowedValues": [
+                "free",
+                "basic",
+                "standard",
+                "standard2",
+                "standard3"
+              ],
+              "metadata": {
+                "description": "Search SKU. The live Foundry IQ service runs Standard; Basic is sufficient for a 10-document corpus in a greenfield rebuild."
+              }
+            },
+            "semanticSearch": {
+              "type": "string",
+              "defaultValue": "free",
+              "allowedValues": [
+                "disabled",
+                "free",
+                "standard"
+              ],
+              "metadata": {
+                "description": "Semantic ranker tier. \"free\" allows 1,000 queries/month at no cost."
+              }
+            },
+            "enableAadAuth": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Allow Entra auth alongside API keys. The live service is apiKeyOnly (enableAadAuth = false)."
+              }
+            },
+            "replicaCount": {
+              "type": "int",
+              "defaultValue": 1,
+              "metadata": {
+                "description": "Replica count."
+              }
+            },
+            "partitionCount": {
+              "type": "int",
+              "defaultValue": 1,
+              "metadata": {
+                "description": "Partition count."
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Search/searchServices",
+              "apiVersion": "2024-06-01-preview",
+              "name": "[parameters('name')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "sku": {
+                "name": "[parameters('sku')]"
+              },
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "replicaCount": "[parameters('replicaCount')]",
+                "partitionCount": "[parameters('partitionCount')]",
+                "hostingMode": "default",
+                "publicNetworkAccess": "enabled",
+                "semanticSearch": "[parameters('semanticSearch')]",
+                "disableLocalAuth": false,
+                "authOptions": "[if(parameters('enableAadAuth'), createObject('aadOrApiKey', createObject('aadAuthFailureMode', 'http401WithBearerChallenge')), createObject('apiKeyOnly', createObject()))]"
+              }
+            }
+          ],
+          "outputs": {
+            "name": {
+              "type": "string",
+              "value": "[parameters('name')]"
+            },
+            "id": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.Search/searchServices', parameters('name'))]"
+            },
+            "endpoint": {
+              "type": "string",
+              "value": "[format('https://{0}.search.windows.net', parameters('name'))]"
+            },
+            "principalId": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.Search/searchServices', parameters('name')), '2024-06-01-preview', 'full').identity.principalId]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "condition": "[and(parameters('createSearch'), not(variables('searchIsLocal')))]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "search-remote",
+      "resourceGroup": "[variables('resolvedSearchRg')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "name": {
+            "value": "[variables('resolvedSearchName')]"
+          },
+          "location": {
+            "value": "[variables('resolvedSearchLocation')]"
+          },
+          "tags": {
+            "value": "[variables('tags')]"
+          },
+          "sku": {
+            "value": "[parameters('searchSku')]"
+          },
+          "semanticSearch": {
+            "value": "[parameters('searchSemanticTier')]"
+          },
+          "enableAadAuth": {
+            "value": "[parameters('searchEnableAadAuth')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.42.1.51946",
+              "templateHash": "14963937147096694098"
+            }
+          },
+          "parameters": {
+            "name": {
+              "type": "string",
+              "metadata": {
+                "description": "Name of the search service."
+              }
+            },
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region."
+              }
+            },
+            "tags": {
+              "type": "object",
+              "metadata": {
+                "description": "Resource tags."
+              }
+            },
+            "sku": {
+              "type": "string",
+              "defaultValue": "basic",
+              "allowedValues": [
+                "free",
+                "basic",
+                "standard",
+                "standard2",
+                "standard3"
+              ],
+              "metadata": {
+                "description": "Search SKU. The live Foundry IQ service runs Standard; Basic is sufficient for a 10-document corpus in a greenfield rebuild."
+              }
+            },
+            "semanticSearch": {
+              "type": "string",
+              "defaultValue": "free",
+              "allowedValues": [
+                "disabled",
+                "free",
+                "standard"
+              ],
+              "metadata": {
+                "description": "Semantic ranker tier. \"free\" allows 1,000 queries/month at no cost."
+              }
+            },
+            "enableAadAuth": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Allow Entra auth alongside API keys. The live service is apiKeyOnly (enableAadAuth = false)."
+              }
+            },
+            "replicaCount": {
+              "type": "int",
+              "defaultValue": 1,
+              "metadata": {
+                "description": "Replica count."
+              }
+            },
+            "partitionCount": {
+              "type": "int",
+              "defaultValue": 1,
+              "metadata": {
+                "description": "Partition count."
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Search/searchServices",
+              "apiVersion": "2024-06-01-preview",
+              "name": "[parameters('name')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "sku": {
+                "name": "[parameters('sku')]"
+              },
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "replicaCount": "[parameters('replicaCount')]",
+                "partitionCount": "[parameters('partitionCount')]",
+                "hostingMode": "default",
+                "publicNetworkAccess": "enabled",
+                "semanticSearch": "[parameters('semanticSearch')]",
+                "disableLocalAuth": false,
+                "authOptions": "[if(parameters('enableAadAuth'), createObject('aadOrApiKey', createObject('aadAuthFailureMode', 'http401WithBearerChallenge')), createObject('apiKeyOnly', createObject()))]"
+              }
+            }
+          ],
+          "outputs": {
+            "name": {
+              "type": "string",
+              "value": "[parameters('name')]"
+            },
+            "id": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.Search/searchServices', parameters('name'))]"
+            },
+            "endpoint": {
+              "type": "string",
+              "value": "[format('https://{0}.search.windows.net', parameters('name'))]"
+            },
+            "principalId": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.Search/searchServices', parameters('name')), '2024-06-01-preview', 'full').identity.principalId]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "condition": "[parameters('createFoundry')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "foundry",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "accountName": {
+            "value": "[variables('resolvedFoundryName')]"
+          },
+          "projectName": {
+            "value": "[parameters('foundryProjectName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "tags": {
+            "value": "[variables('tags')]"
+          },
+          "disableLocalAuth": {
+            "value": "[parameters('foundryDisableLocalAuth')]"
+          },
+          "userOwnedStorageAccountIds": {
+            "value": "[variables('userOwnedStorageIds')]"
+          },
+          "deployModel": {
+            "value": "[parameters('deployModel')]"
+          },
+          "modelDeploymentName": {
+            "value": "[parameters('modelDeploymentName')]"
+          },
+          "modelName": {
+            "value": "[parameters('modelName')]"
+          },
+          "modelVersion": {
+            "value": "[parameters('modelVersion')]"
+          },
+          "modelCapacity": {
+            "value": "[parameters('modelCapacity')]"
+          },
+          "deployEmbeddingModel": {
+            "value": "[parameters('deployEmbeddingModel')]"
+          },
+          "embeddingDeploymentName": {
+            "value": "[parameters('embeddingDeploymentName')]"
+          },
+          "embeddingModelName": {
+            "value": "[parameters('embeddingModelName')]"
+          },
+          "embeddingModelVersion": {
+            "value": "[parameters('embeddingModelVersion')]"
+          },
+          "embeddingSku": {
+            "value": "[parameters('embeddingSku')]"
+          },
+          "embeddingCapacity": {
+            "value": "[parameters('embeddingCapacity')]"
+          },
+          "raiPolicyName": {
+            "value": "[parameters('raiPolicyName')]"
+          },
+          "versionUpgradeOption": {
+            "value": "[parameters('versionUpgradeOption')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.42.1.51946",
+              "templateHash": "14574623442911936908"
+            }
+          },
+          "parameters": {
+            "accountName": {
+              "type": "string",
+              "metadata": {
+                "description": "Foundry (AIServices) account name."
+              }
+            },
+            "projectName": {
+              "type": "string",
+              "metadata": {
+                "description": "Project name under the account."
+              }
+            },
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region."
+              }
+            },
+            "tags": {
+              "type": "object",
+              "metadata": {
+                "description": "Resource tags."
+              }
+            },
+            "projectDisplayName": {
+              "type": "string",
+              "defaultValue": "Mortgage Renewal Concierge",
+              "metadata": {
+                "description": "Project display name shown in the Foundry portal."
+              }
+            },
+            "projectDescription": {
+              "type": "string",
+              "defaultValue": "SYNTHETIC DEMO DATA. Agent grounding across Work IQ, Fabric IQ and Foundry IQ for the 180-day mortgage renewal campaign.",
+              "metadata": {
+                "description": "Project description."
+              }
+            },
+            "modelDeploymentName": {
+              "type": "string",
+              "defaultValue": "gpt-5.4",
+              "metadata": {
+                "description": "Model deployment name the agent calls."
+              }
+            },
+            "modelName": {
+              "type": "string",
+              "defaultValue": "gpt-5.4",
+              "metadata": {
+                "description": "Model name."
+              }
+            },
+            "modelVersion": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Model version. Leave blank to let the platform pick the default."
+              }
+            },
+            "modelSku": {
+              "type": "string",
+              "defaultValue": "GlobalStandard",
+              "allowedValues": [
+                "GlobalStandard",
+                "DataZoneStandard",
+                "Standard"
+              ],
+              "metadata": {
+                "description": "Deployment SKU."
+              }
+            },
+            "modelCapacity": {
+              "type": "int",
+              "defaultValue": 100,
+              "metadata": {
+                "description": "Capacity in thousands of tokens per minute."
+              }
+            },
+            "raiPolicyName": {
+              "type": "string",
+              "defaultValue": "Microsoft.DefaultV2",
+              "metadata": {
+                "description": "Responsible AI policy applied to the deployment."
+              }
+            },
+            "versionUpgradeOption": {
+              "type": "string",
+              "defaultValue": "OnceNewDefaultVersionAvailable",
+              "allowedValues": [
+                "OnceNewDefaultVersionAvailable",
+                "OnceCurrentVersionExpired",
+                "NoAutoUpgrade"
+              ],
+              "metadata": {
+                "description": "Version upgrade behaviour."
+              }
+            },
+            "deployModel": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Deploy the model. Set false if the deployment already exists or quota is unavailable."
+              }
+            },
+            "deployEmbeddingModel": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Deploy the embedding model used to vectorise the Foundry IQ policy corpus."
+              }
+            },
+            "embeddingDeploymentName": {
+              "type": "string",
+              "defaultValue": "text-embedding-3-small",
+              "metadata": {
+                "description": "Embedding deployment name."
+              }
+            },
+            "embeddingModelName": {
+              "type": "string",
+              "defaultValue": "text-embedding-3-small",
+              "metadata": {
+                "description": "Embedding model name."
+              }
+            },
+            "embeddingModelVersion": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Embedding model version. Leave blank to let the platform pick the default."
+              }
+            },
+            "embeddingSku": {
+              "type": "string",
+              "defaultValue": "GlobalStandard",
+              "allowedValues": [
+                "GlobalStandard",
+                "DataZoneStandard",
+                "Standard"
+              ],
+              "metadata": {
+                "description": "Embedding deployment SKU."
+              }
+            },
+            "embeddingCapacity": {
+              "type": "int",
+              "defaultValue": 120,
+              "metadata": {
+                "description": "Embedding capacity in thousands of tokens per minute."
+              }
+            },
+            "disableLocalAuth": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Disable API-key (local) auth on the account, forcing Entra tokens. Live estate has this ON."
+              }
+            },
+            "userOwnedStorageAccountIds": {
+              "type": "array",
+              "defaultValue": [],
+              "metadata": {
+                "description": "Resource IDs of storage accounts attached to the account as user-owned storage. Blank = none."
+              }
+            }
+          },
+          "variables": {
+            "userOwnedStorage": "[map(parameters('userOwnedStorageAccountIds'), lambda('id', createObject('resourceId', lambdaVariables('id'))))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.CognitiveServices/accounts",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[parameters('accountName')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "kind": "AIServices",
+              "sku": {
+                "name": "S0"
+              },
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": "[union(createObject('allowProjectManagement', true(), 'customSubDomainName', parameters('accountName'), 'publicNetworkAccess', 'Enabled', 'disableLocalAuth', parameters('disableLocalAuth')), if(empty(parameters('userOwnedStorageAccountIds')), createObject(), createObject('userOwnedStorage', variables('userOwnedStorage'))))]"
+            },
+            {
+              "type": "Microsoft.CognitiveServices/accounts/projects",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[format('{0}/{1}', parameters('accountName'), parameters('projectName'))]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "displayName": "[parameters('projectDisplayName')]",
+                "description": "[parameters('projectDescription')]"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('accountName'))]"
+              ]
+            },
+            {
+              "condition": "[parameters('deployModel')]",
+              "type": "Microsoft.CognitiveServices/accounts/deployments",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[format('{0}/{1}', parameters('accountName'), parameters('modelDeploymentName'))]",
+              "sku": {
+                "name": "[parameters('modelSku')]",
+                "capacity": "[parameters('modelCapacity')]"
+              },
+              "properties": {
+                "model": "[union(createObject('format', 'OpenAI', 'name', parameters('modelName')), if(empty(parameters('modelVersion')), createObject(), createObject('version', parameters('modelVersion'))))]",
+                "raiPolicyName": "[parameters('raiPolicyName')]",
+                "versionUpgradeOption": "[parameters('versionUpgradeOption')]"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('accountName'))]"
+              ]
+            },
+            {
+              "condition": "[parameters('deployEmbeddingModel')]",
+              "type": "Microsoft.CognitiveServices/accounts/deployments",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[format('{0}/{1}', parameters('accountName'), parameters('embeddingDeploymentName'))]",
+              "sku": {
+                "name": "[parameters('embeddingSku')]",
+                "capacity": "[parameters('embeddingCapacity')]"
+              },
+              "properties": {
+                "model": "[union(createObject('format', 'OpenAI', 'name', parameters('embeddingModelName')), if(empty(parameters('embeddingModelVersion')), createObject(), createObject('version', parameters('embeddingModelVersion'))))]",
+                "raiPolicyName": "[parameters('raiPolicyName')]",
+                "versionUpgradeOption": "[parameters('versionUpgradeOption')]"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('accountName'))]",
+                "[resourceId('Microsoft.CognitiveServices/accounts/deployments', parameters('accountName'), parameters('modelDeploymentName'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "accountName": {
+              "type": "string",
+              "value": "[parameters('accountName')]"
+            },
+            "accountId": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.CognitiveServices/accounts', parameters('accountName'))]"
+            },
+            "accountEndpoint": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', parameters('accountName')), '2025-04-01-preview').endpoint]"
+            },
+            "projectName": {
+              "type": "string",
+              "value": "[parameters('projectName')]"
+            },
+            "projectEndpoint": {
+              "type": "string",
+              "value": "[format('https://{0}.services.ai.azure.com/api/projects/{1}', parameters('accountName'), parameters('projectName'))]"
+            },
+            "modelDeploymentName": {
+              "type": "string",
+              "value": "[if(parameters('deployModel'), parameters('modelDeploymentName'), parameters('modelDeploymentName'))]"
+            },
+            "embeddingDeploymentName": {
+              "type": "string",
+              "value": "[if(parameters('deployEmbeddingModel'), parameters('embeddingDeploymentName'), parameters('embeddingDeploymentName'))]"
+            },
+            "accountPrincipalId": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', parameters('accountName')), '2025-04-01-preview', 'full').identity.principalId]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'foundry-platform')]"
+      ]
+    },
+    {
+      "condition": "[and(parameters('createFabricCapacity'), variables('fabricIsLocal'))]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "fabric-capacity",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "name": {
+            "value": "[parameters('fabricCapacityName')]"
+          },
+          "location": {
+            "value": "[variables('resolvedFabricLocation')]"
+          },
+          "tags": {
+            "value": "[variables('tags')]"
+          },
+          "skuName": {
+            "value": "[parameters('fabricSkuName')]"
+          },
+          "adminMembers": {
+            "value": "[parameters('fabricAdminMembers')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.42.1.51946",
+              "templateHash": "17367074475035376984"
+            }
+          },
+          "parameters": {
+            "name": {
+              "type": "string",
+              "metadata": {
+                "description": "Capacity name (lowercase alphanumeric, 3-63 chars)."
+              }
+            },
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region."
+              }
+            },
+            "tags": {
+              "type": "object",
+              "metadata": {
+                "description": "Resource tags."
+              }
+            },
+            "skuName": {
+              "type": "string",
+              "defaultValue": "F2",
+              "allowedValues": [
+                "F2",
+                "F4",
+                "F8",
+                "F16",
+                "F32",
+                "F64"
+              ],
+              "metadata": {
+                "description": "Fabric SKU. F2 suits a single-presenter demo; F4+ for concurrency."
+              }
+            },
+            "adminMembers": {
+              "type": "array",
+              "metadata": {
+                "description": "Entra object IDs (users or groups) set as capacity administrators. Must contain at least one."
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Fabric/capacities",
+              "apiVersion": "2023-11-01",
+              "name": "[parameters('name')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "sku": {
+                "name": "[parameters('skuName')]",
+                "tier": "Fabric"
+              },
+              "properties": {
+                "administration": {
+                  "members": "[parameters('adminMembers')]"
+                }
+              }
+            }
+          ],
+          "outputs": {
+            "name": {
+              "type": "string",
+              "value": "[parameters('name')]"
+            },
+            "id": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.Fabric/capacities', parameters('name'))]"
+            },
+            "sku": {
+              "type": "string",
+              "value": "[parameters('skuName')]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "condition": "[and(parameters('createFabricCapacity'), not(variables('fabricIsLocal')))]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "fabric-capacity-remote",
+      "resourceGroup": "[variables('resolvedFabricRg')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "name": {
+            "value": "[parameters('fabricCapacityName')]"
+          },
+          "location": {
+            "value": "[variables('resolvedFabricLocation')]"
+          },
+          "tags": {
+            "value": "[variables('tags')]"
+          },
+          "skuName": {
+            "value": "[parameters('fabricSkuName')]"
+          },
+          "adminMembers": {
+            "value": "[parameters('fabricAdminMembers')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.42.1.51946",
+              "templateHash": "17367074475035376984"
+            }
+          },
+          "parameters": {
+            "name": {
+              "type": "string",
+              "metadata": {
+                "description": "Capacity name (lowercase alphanumeric, 3-63 chars)."
+              }
+            },
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region."
+              }
+            },
+            "tags": {
+              "type": "object",
+              "metadata": {
+                "description": "Resource tags."
+              }
+            },
+            "skuName": {
+              "type": "string",
+              "defaultValue": "F2",
+              "allowedValues": [
+                "F2",
+                "F4",
+                "F8",
+                "F16",
+                "F32",
+                "F64"
+              ],
+              "metadata": {
+                "description": "Fabric SKU. F2 suits a single-presenter demo; F4+ for concurrency."
+              }
+            },
+            "adminMembers": {
+              "type": "array",
+              "metadata": {
+                "description": "Entra object IDs (users or groups) set as capacity administrators. Must contain at least one."
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Fabric/capacities",
+              "apiVersion": "2023-11-01",
+              "name": "[parameters('name')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "sku": {
+                "name": "[parameters('skuName')]",
+                "tier": "Fabric"
+              },
+              "properties": {
+                "administration": {
+                  "members": "[parameters('adminMembers')]"
+                }
+              }
+            }
+          ],
+          "outputs": {
+            "name": {
+              "type": "string",
+              "value": "[parameters('name')]"
+            },
+            "id": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.Fabric/capacities', parameters('name'))]"
+            },
+            "sku": {
+              "type": "string",
+              "value": "[parameters('skuName')]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "condition": "[not(empty(parameters('agentPrincipalId')))]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "rbac",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "principalId": {
+            "value": "[parameters('agentPrincipalId')]"
+          },
+          "principalType": {
+            "value": "[parameters('agentPrincipalType')]"
+          },
+          "foundryAccountName": {
+            "value": "[variables('resolvedFoundryName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.42.1.51946",
+              "templateHash": "11178328000265452286"
+            }
+          },
+          "parameters": {
+            "principalId": {
+              "type": "string",
+              "metadata": {
+                "description": "Entra object ID of the principal running the agent (user or managed identity)."
+              }
+            },
+            "principalType": {
+              "type": "string",
+              "defaultValue": "User",
+              "allowedValues": [
+                "User",
+                "Group",
+                "ServicePrincipal"
+              ],
+              "metadata": {
+                "description": "Principal type. Use ServicePrincipal for managed identities."
+              }
+            },
+            "foundryAccountName": {
+              "type": "string",
+              "metadata": {
+                "description": "Foundry (AIServices) account name to grant data-plane access on."
+              }
+            }
+          },
+          "variables": {
+            "azureAiUserRoleId": "53ca6127-db72-4b80-b1b0-d745d6d5456d"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.CognitiveServices/accounts', parameters('foundryAccountName'))]",
+              "name": "[guid(resourceId('Microsoft.CognitiveServices/accounts', parameters('foundryAccountName')), parameters('principalId'), variables('azureAiUserRoleId'))]",
+              "properties": {
+                "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', variables('azureAiUserRoleId'))]",
+                "principalId": "[parameters('principalId')]",
+                "principalType": "[parameters('principalType')]"
+              }
+            }
+          ]
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'foundry')]"
+      ]
+    },
+    {
+      "condition": "[and(not(empty(parameters('agentPrincipalId'))), not(empty(variables('resolvedSearchName'))))]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "rbac-search",
+      "resourceGroup": "[variables('resolvedSearchRg')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "principalId": {
+            "value": "[parameters('agentPrincipalId')]"
+          },
+          "principalType": {
+            "value": "[parameters('agentPrincipalType')]"
+          },
+          "searchServiceName": {
+            "value": "[variables('resolvedSearchName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.42.1.51946",
+              "templateHash": "17809670223468686461"
+            }
+          },
+          "parameters": {
+            "principalId": {
+              "type": "string",
+              "metadata": {
+                "description": "Entra object ID of the principal running the agent (user or managed identity)."
+              }
+            },
+            "principalType": {
+              "type": "string",
+              "defaultValue": "User",
+              "allowedValues": [
+                "User",
+                "Group",
+                "ServicePrincipal"
+              ],
+              "metadata": {
+                "description": "Principal type. Use ServicePrincipal for managed identities."
+              }
+            },
+            "searchServiceName": {
+              "type": "string",
+              "metadata": {
+                "description": "Search service name in this resource group."
+              }
+            }
+          },
+          "variables": {
+            "searchIndexDataReaderRoleId": "1407120a-92aa-4202-b7e9-c0e197c71c8f",
+            "searchServiceContributorRoleId": "7ca78c08-252a-4471-8644-bb5ff32d4ba0"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.Search/searchServices', parameters('searchServiceName'))]",
+              "name": "[guid(resourceId('Microsoft.Search/searchServices', parameters('searchServiceName')), parameters('principalId'), variables('searchIndexDataReaderRoleId'))]",
+              "properties": {
+                "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', variables('searchIndexDataReaderRoleId'))]",
+                "principalId": "[parameters('principalId')]",
+                "principalType": "[parameters('principalType')]"
+              }
+            },
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.Search/searchServices', parameters('searchServiceName'))]",
+              "name": "[guid(resourceId('Microsoft.Search/searchServices', parameters('searchServiceName')), parameters('principalId'), variables('searchServiceContributorRoleId'))]",
+              "properties": {
+                "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', variables('searchServiceContributorRoleId'))]",
+                "principalId": "[parameters('principalId')]",
+                "principalType": "[parameters('principalType')]"
+              }
+            }
+          ]
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'search')]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resolvedSearchRg')), 'Microsoft.Resources/deployments', 'search-remote')]"
+      ]
+    }
+  ],
+  "outputs": {
+    "searchEndpoint": {
+      "type": "string",
+      "metadata": {
+        "description": "Set as SEARCH_ENDPOINT."
+      },
+      "value": "[format('https://{0}.search.windows.net', variables('resolvedSearchName'))]"
+    },
+    "searchServiceName": {
+      "type": "string",
+      "value": "[variables('resolvedSearchName')]"
+    },
+    "searchResourceGroupName": {
+      "type": "string",
+      "value": "[variables('resolvedSearchRg')]"
+    },
+    "searchIndexName": {
+      "type": "string",
+      "metadata": {
+        "description": "Set as SEARCH_INDEX. Created by index_renewal_policies.py, not by Bicep."
+      },
+      "value": "renewal-policies"
+    },
+    "foundryProjectEndpoint": {
+      "type": "string",
+      "metadata": {
+        "description": "Set as FOUNDRY_PROJECT_ENDPOINT."
+      },
+      "value": "[if(parameters('createFoundry'), reference(resourceId('Microsoft.Resources/deployments', 'foundry'), '2025-04-01').outputs.projectEndpoint.value, format('https://{0}.services.ai.azure.com/api/projects/{1}', parameters('foundryAccountName'), parameters('foundryProjectName')))]"
+    },
+    "foundryAccountName": {
+      "type": "string",
+      "value": "[variables('resolvedFoundryName')]"
+    },
+    "modelDeploymentName": {
+      "type": "string",
+      "metadata": {
+        "description": "Set as FOUNDRY_MODEL."
+      },
+      "value": "[parameters('modelDeploymentName')]"
+    },
+    "embeddingDeploymentName": {
+      "type": "string",
+      "metadata": {
+        "description": "Embedding deployment used to vectorise the policy corpus."
+      },
+      "value": "[parameters('embeddingDeploymentName')]"
+    },
+    "foundryStorageAccountName": {
+      "type": "string",
+      "value": "[if(parameters('manageFoundryPlatform'), variables('resolvedStorageName'), 'not-managed')]"
+    },
+    "foundryKeyVaultName": {
+      "type": "string",
+      "value": "[if(parameters('manageFoundryPlatform'), variables('resolvedKeyVaultName'), 'not-managed')]"
+    },
+    "foundryAppInsightsName": {
+      "type": "string",
+      "value": "[if(parameters('manageFoundryPlatform'), variables('resolvedAppInsightsName'), 'not-managed')]"
+    },
+    "fabricCapacityName": {
+      "type": "string",
+      "value": "[if(parameters('createFabricCapacity'), if(variables('fabricIsLocal'), reference(resourceId('Microsoft.Resources/deployments', 'fabric-capacity'), '2025-04-01').outputs.name.value, reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resolvedFabricRg')), 'Microsoft.Resources/deployments', 'fabric-capacity-remote'), '2025-04-01').outputs.name.value), parameters('fabricCapacityName'))]"
+    },
+    "fabricResourceGroupName": {
+      "type": "string",
+      "value": "[variables('resolvedFabricRg')]"
+    },
+    "nextSteps": {
+      "type": "array",
+      "metadata": {
+        "description": "Fabric workspace/lakehouse/semantic model are data plane - run deploy_fabric.py next."
+      },
+      "value": [
+        "python data/fabric-iq/deploy_fabric.py --capacity <capacity-name>",
+        "python data/foundry-iq/index_renewal_policies.py",
+        "python data/work-iq/provision_seeder_app.py",
+        "python data/work-iq/seed_work_iq.py --auth cli --map-users",
+        "python data/work-iq/seed_work_iq.py --only mail --purge",
+        "python data/work-iq/seed_work_iq.py --only teams",
+        "python data/work-iq/seed_work_iq.py --only teams --messages-only --auth device",
+        "python data/work-iq/seed_work_iq.py --only files",
+        "python agent/create_agent.py --create"
+      ]
+    }
+  }
+}

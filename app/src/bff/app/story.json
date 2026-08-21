@@ -1,0 +1,275 @@
+{
+  "$note": "Guided demo chapters. The left panel is deterministic narrative; the right panel is the live agent. If the agent has an off moment the story still lands.",
+  "persona": {
+    "$note": "Fallback only. The app replaces name/title from Microsoft Graph for whoever is signed in, and picks goal/objectives from personaByRole below.",
+    "name": "Raj Balakrishnan",
+    "title": "VP, Real Estate Secured Lending",
+    "org": "CFC Bank",
+    "goal": "Hold the FY26 renewal book.",
+    "objectives": [
+      "Understand what the branches are actually saying before looking at numbers.",
+      "Find the customers most likely to leave, and what they are worth.",
+      "Know what we are allowed to offer, and who has to approve it.",
+      "Turn all of it into a defensible decision the team can act on."
+    ]
+  },
+  "personaByRole": {
+    "Executive": {
+      "goal": "Hold the FY26 renewal book.",
+      "objectives": [
+        "Understand what the branches are actually saying before looking at numbers.",
+        "Find the customers most likely to leave, and what they are worth.",
+        "Know what we are allowed to offer, and who has to approve it.",
+        "Turn all of it into a defensible decision the team can act on."
+      ],
+      "points": [
+        "50 renewals maturing inside 180 days",
+        "Average payment increase of about 100%",
+        "Three branches, three completely different problems"
+      ]
+    },
+    "BranchManager": {
+      "goal": "Protect my branch's maturing book.",
+      "objectives": [
+        "See which of my renewals are most likely to walk, and what they are worth.",
+        "Know where my advisors are over capacity before it costs me a file.",
+        "Get an answer on pricing exceptions without waiting five days.",
+        "Escalate with evidence, not anecdote."
+      ],
+      "points": [
+        "Branch-level view of the maturing book",
+        "Advisor load and coverage gaps",
+        "Escalations and their approval path"
+      ]
+    },
+    "Advisor": {
+      "goal": "Keep my clients at renewal.",
+      "objectives": [
+        "Know which of my files to call first, and why.",
+        "See what the client is actually worth to the bank, not just the mortgage.",
+        "Know the offer I can make and the discount I can approve myself.",
+        "Have the evidence ready before I escalate."
+      ],
+      "points": [
+        "My renewals, ranked by value at risk",
+        "The offer and discount I can approve",
+        "What evidence an exception needs"
+      ]
+    }
+  },
+  "chapters": [
+    {
+      "id": "01-meet-raj",
+      "title": "Your renewal book",
+      "kicker": "The person, the pressure",
+      "layout": "persona",
+      "body": "Roughly CAD 26.4 million of mortgage balance matures in the next 180 days across three pilot branches. Most of it was originated between 1.8% and 3.2%; almost all of it renews into the high 4s. Six weeks of email, Teams threads and meeting minutes sit on one side, a governed renewal book on the other — and nothing reconciles them.",
+      "points": [
+        "50 renewals maturing inside 180 days",
+        "Average payment increase of about 100%",
+        "Three branches, three completely different problems"
+      ],
+      "prompt": null
+    },
+    {
+      "id": "02-architecture",
+      "title": "Unify data where it lives",
+      "kicker": "From systems of record to one intelligence platform",
+      "layout": "architecture",
+      "body": "Nothing migrates. Mortgage servicing, the customer master and the risk model stay where they are; Fabric mirrors them into OneLake as governed measures. Microsoft 365 keeps the human context — the email, the Teams threads, the meeting records. Foundry holds the pricing and policy corpus. The agent reasons across all three under the user's own Entra identity.",
+      "columns": [
+        {
+          "title": "Data stays where it lives",
+          "tag": "Systems of record",
+          "items": [
+            {
+              "name": "Mortgage servicing",
+              "detail": "Balances, rates, maturity dates"
+            },
+            {
+              "name": "Customer master",
+              "detail": "Segment, tenure, products held"
+            },
+            {
+              "name": "Risk & pricing",
+              "detail": "Attrition model, discount grid"
+            }
+          ]
+        },
+        {
+          "title": "Unified foundation",
+          "tag": "Microsoft Fabric",
+          "items": [
+            {
+              "name": "OneLake",
+              "detail": "Delta tables, no data migration"
+            },
+            {
+              "name": "Semantic model",
+              "detail": "Governed measures, Direct Lake"
+            }
+          ]
+        },
+        {
+          "title": "One connected workflow",
+          "tag": "Intelligence & action",
+          "items": [
+            {
+              "name": "Work IQ",
+              "detail": "Email, Teams, and documents"
+            },
+            {
+              "name": "Fabric IQ",
+              "detail": "The live renewal book"
+            },
+            {
+              "name": "Foundry IQ",
+              "detail": "Policy, pricing and regulation"
+            },
+            {
+              "name": "Web IQ",
+              "detail": "Competitor and market signal"
+            }
+          ]
+        }
+      ],
+      "assurances": [
+        "No data migration",
+        "Governed business measures",
+        "Any model, swappable",
+        "Microsoft Entra identity"
+      ],
+      "prompt": null
+    },
+    {
+      "id": "03-work-iq",
+      "title": "Pick up the signal",
+      "kicker": "Work IQ · what the business has already said",
+      "layout": "iq",
+      "iq": "work",
+      "body": "Before touching a number, {firstName} wants to know what their own organisation has already told them. Six weeks of branch escalations, advisor feedback and executive direction — reconciled, not just listed.",
+      "stakes": "Without Work IQ, six weeks of correspondence goes unread and the campaign gets planned around whoever emailed most recently. The signal already exists; nobody has time to read it.",
+      "note": "This runs under {firstName}'s identity. They see what they can see; nothing more.",
+      "prompt": "Summarise what branch leaders, advisors and executives have said about the FY26 renewal campaign over the last six weeks. Group it as branch leader concerns, advisor feedback, escalations on renewal rates, and executive guidance. Where people contradict each other, name the disagreement rather than smoothing it over.",
+      "expect": [
+        "BR-101 advisor capacity — Marcus Delaney, 18 maturities against two advisors",
+        "BR-202 competitor pricing in Québec — claimed 30 to 40 bps below our floor",
+        "BR-303 payment shock among self-employed clients",
+        "RNW-5014: 32 bps requested, 28 approved with three conditions"
+      ]
+    },
+    {
+      "id": "04-fabric-iq",
+      "title": "Size what they told us",
+      "kicker": "Fabric IQ · the governed renewal book",
+      "layout": "iq",
+      "iq": "fabric",
+      "body": "The branches have said where it hurts. That is a hypothesis, not a number. The semantic model settles it — and settles it with the same measures the monthly risk pack uses, so the answer the agent gives and the answer the CRO reads are the same figure.",
+      "stakes": "Without Fabric IQ, that summary stays anecdote. Nobody can say which branch actually carries the exposure, what it is worth, or whether the loudest voice is the biggest problem.",
+      "note": "Direct Lake over OneLake. Governed measures, not ad-hoc SQL.",
+      "prompt": "Now size it against the book. For renewals maturing in the next 180 days, break the portfolio down by segment and by branch, then list the customers most at risk of attrition ranked by probability-weighted value at risk — with the recommended retention offer and the approval level each one needs.",
+      "expect": [
+        "50 renewals · CAD 26,443,000 maturing · CAD 379,735 annual exposure",
+        "Value at Risk CAD 212,460 — probability-weighted, a governed measure",
+        "Which branch actually carries the exposure, not which one complained loudest",
+        "Every recommendation carries its required approval level"
+      ]
+    },
+    {
+      "id": "05-foundry-iq",
+      "title": "Know what we are allowed to do",
+      "kicker": "Foundry IQ · pricing, policy and regulation",
+      "layout": "iq",
+      "iq": "foundry",
+      "body": "We now know who is leaving and what they are worth. Neither fact is actionable until we know what we are permitted to offer them, and who has to sign it off.",
+      "stakes": "Without Foundry IQ, the agent can tell you who to save but not what you may do about it. A retention recommendation with no approval path and no evidence standard is something a banker cannot act on.",
+      "note": "OSFI B-20, E-21 and E-23 are real public guidelines. The surrounding policy text is synthetic.",
+      "prompt": "For those high-risk renewals, what are we actually permitted to offer? Give the discount guardrails by authority level, who must approve what, the competitor evidence standard that applies, and which OSFI guidelines are engaged.",
+      "expect": [
+        "Advisor 20 bps · Branch Manager 25 bps · above that, Pricing Committee",
+        "Written competitor evidence mandatory above 20 bps (RP-002)",
+        "OSFI B-20 on straight renewals; E-23 on the attrition model",
+        "Serial exceptions are themselves a control finding (RP-008)"
+      ]
+    },
+    {
+      "id": "06-web-iq",
+      "title": "Test the claim against the market",
+      "kicker": "Web IQ · the evidence policy actually demands",
+      "layout": "iq",
+      "iq": "web",
+      "body": "Every discount request in this campaign rests on one assertion: competitors are cheaper. Policy does not accept that as stated — RP-002 requires written competitor evidence above 20 bps. That evidence lives outside the bank.",
+      "stakes": "Without Web IQ, the claim driving every exception request is never tested, and the exception fails its own evidence standard. Internal data cannot verify an external market.",
+      "note": "Live public rates via Grounding with Bing. Compare, then judge — do not simply repeat what was found.",
+      "prompt": "Branch leaders claim competitors are pricing 30 to 40 basis points below our renewal floor. Check what major Canadian lenders are currently posting for 5-year fixed mortgage rates, compare that against our floor, and tell me whether the market evidence supports a discretionary exception under RP-002.",
+      "expect": [
+        "Posted 5-year fixed rates from named Canadian lenders, with sources",
+        "Compared against our renewal floor, not just quoted in isolation",
+        "A verdict on the 30 to 40 bps claim from BR-202",
+        "Whether that clears the RP-002 written-evidence bar, or falls short"
+      ]
+    },
+    {
+      "id": "07-together",
+      "title": "Turn signal into decision",
+      "kicker": "All four IQs · the question none of them answer alone",
+      "layout": "iq",
+      "iq": "all",
+      "body": "This is the point. The standard lives in an executive's email. The breach lives in the renewal book. The remedy lives in the policy corpus. No single layer holds the answer, and a human still makes the call.",
+      "stakes": "This question is unanswerable with any one layer. Ask it of the data alone and you get customers with no standard to judge them against; ask it of the correspondence alone and you get a standard nobody has measured.",
+      "note": "Watch which layers light up. The agent chooses; nothing here is scripted.",
+      "prompt": "Diane Lafleur set a standard for proactive customer contact. Which renewals currently breach it, what are they worth, what retention offer would each need, and who has to approve it?",
+      "expect": [
+        "Diane's 120-day contact standard, from her 15 June email",
+        "6 renewals breach it — CAD 3,577,000",
+        "Marta Park: High risk, 52 days out, still Not Started",
+        "Each with its recommended offer and who must approve it"
+      ]
+    },
+    {
+      "id": "08-flow",
+      "title": "Watch it happen",
+      "kicker": "ONE QUESTION, END TO END",
+      "layout": "video",
+      "body": "The architecture slide showed the shape. This is the traffic: one question leaving the browser, the on-behalf-of exchange, the agent choosing its tools, all four layers answering, and the decision coming back with its sources attached.",
+      "assurances": [
+        "No data leaves the tenant except Web IQ",
+        "Every call runs as the signed-in user",
+        "A human still makes the call"
+      ],
+      "note": "Play, scrub or step through. The sequence is a narration of the real call path, not a recording of any single run.",
+      "prompt": null
+    }
+  ],
+  "$suggestions_note": "Layer-tagged so the four IQs are legible from the chat empty state. 'all' marks a question that needs more than one layer to answer honestly.",
+  "suggestions": [
+    {
+      "iq": "work",
+      "text": "What are branch leaders and advisors saying about the renewal campaign?"
+    },
+    {
+      "iq": "fabric",
+      "text": "Which customers are most at risk of attrition in the next 180 days, and what are they worth?"
+    },
+    {
+      "iq": "foundry",
+      "text": "Who approves a renewal discount above 25 basis points, and what evidence is required?"
+    },
+    {
+      "iq": "web",
+      "text": "What are major Canadian lenders posting for 5-year fixed rates right now?"
+    },
+    {
+      "iq": "all",
+      "text": "Nadia Osei said Calgary self-employed clients face payment increases of 70 to 130 percent. Is that accurate?"
+    },
+    {
+      "iq": "all",
+      "text": "How many broker-originated renewals have no owner, and what are they worth?"
+    },
+    {
+      "iq": "all",
+      "text": "Walk me through the RNW-5014 rate escalation — what was requested, what was approved, and on what conditions?"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "$note": "Maps the synthetic personas onto real licensed accounts in the demo tenant. The tenant has no spare M365 E5 / Copilot licences, so new users cannot be created - a user without a licence has no mailbox (mail import fails) and cannot be grounded on by Work IQ / M365 Copilot. seed_work_iq.py --map-users renames these accounts to the persona names and snapshots the originals to user_mapping.restore.json; --restore-users puts them back.",
+  "tenant_domain": "M365CPI65678641.OnMicrosoft.com",
+  "driver_alias": "raj.balakrishnan",
+  "$driver_note": "The account you sign in as to ask Work IQ questions. Work IQ only grounds on content the signed-in user can access, so the driver is cc'd on every email at seed time. Raj chairs the Renewal Council, so he legitimately sits across branch concerns, advisor feedback, escalations and executive guidance - the four categories the demo question asks for.",
+  "mapping": {
+    "diane.lafleur": {
+      "upn": "LisaT@M365CPI65678641.OnMicrosoft.com",
+      "displayName": "Diane Lafleur",
+      "jobTitle": "EVP, Personal Banking",
+      "department": "Personal Banking"
+    },
+    "raj.balakrishnan": {
+      "upn": "MarioR@M365CPI65678641.OnMicrosoft.com",
+      "displayName": "Raj Balakrishnan",
+      "jobTitle": "VP, Real Estate Secured Lending",
+      "department": "Real Estate Secured Lending"
+    },
+    "karen.whitfield": {
+      "upn": "MonicaT@M365CPI65678641.OnMicrosoft.com",
+      "displayName": "Karen Whitfield",
+      "jobTitle": "Chief Risk Officer",
+      "department": "Risk"
+    },
+    "derek.fontaine": {
+      "upn": "SEdemo@m365cpi65678641.onmicrosoft.com",
+      "displayName": "Derek Fontaine",
+      "jobTitle": "Director, Mortgage Pricing",
+      "department": "Mortgage Pricing"
+    },
+    "marcus.delaney": {
+      "upn": "AdilE@M365CPI65678641.OnMicrosoft.com",
+      "displayName": "Marcus Delaney",
+      "jobTitle": "Branch Manager, Toronto Bay & Bloor (BR-101)",
+      "department": "Retail Distribution"
+    },
+    "sophie.tremblay": {
+      "upn": "AmberR@M365CPI65678641.OnMicrosoft.com",
+      "displayName": "Sophie Tremblay",
+      "jobTitle": "Branch Manager, Montreal Plateau (BR-202)",
+      "department": "Retail Distribution"
+    },
+    "nadia.osei": {
+      "upn": "BillieV@M365CPI65678641.OnMicrosoft.com",
+      "displayName": "Nadia Osei",
+      "jobTitle": "Branch Manager, Calgary Centre Street (BR-303)",
+      "department": "Retail Distribution"
+    },
+    "priya.raghavan": {
+      "upn": "CoreyG@M365CPI65678641.OnMicrosoft.com",
+      "displayName": "Priya Raghavan",
+      "jobTitle": "Mortgage Advisor (ADV-012)",
+      "department": "Retail Distribution"
+    },
+    "wei.zhang": {
+      "upn": "DaichiM@M365CPI65678641.OnMicrosoft.com",
+      "displayName": "Wei Zhang",
+      "jobTitle": "Senior Mortgage Advisor (ADV-021)",
+      "department": "Retail Distribution"
+    },
+    "fatima.haddad": {
+      "upn": "EkaS@M365CPI65678641.OnMicrosoft.com",
+      "displayName": "Fatima Haddad",
+      "jobTitle": "Senior Mortgage Advisor (ADV-031)",
+      "department": "Retail Distribution"
+    }
+  },
+  "$consolidation_note": "Consolidated from 14 to 10 personas to free four M365 licences. Liam O'Connor, Camille Fortin, Jonas Berg and Helena Vasquez no longer author mail or Teams posts - their content was reassigned to Priya Raghavan, Wei Zhang, Fatima Haddad and Karen Whitfield respectively. They remain named staff in the meeting records and in customers.csv, neither of which needs a mailbox. Freed accounts: CoraT (was Liam O'Connor), DakotaS (was Camille Fortin), HadarC (was Jonas Berg), KaiC (was Helena Vasquez).",
+  "$drift_note": "derek.fontaine was previously mapped to OmarB, which no longer exists in the tenant; the live account carrying Derek Fontaine is SEdemo. Corrected 2026-08-10. If mail seeding ever fails with an unresolved recipient, re-run 'seed_work_iq.py --auth cli --check-users' first - it resolves every persona against the directory and is the fastest way to catch this class of drift."
+}

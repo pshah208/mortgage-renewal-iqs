@@ -1,0 +1,317 @@
+{
+  "$schema_note": "SYNTHETIC DEMO DATA. Teams corpus for the Mortgage Renewal Concierge. CFC Bank is used only as a branding label - no person, figure or policy here reflects real CFC Bank data. seed_work_iq.py creates the team, the channels, then posts each root message and its replies in order. Aliases resolve to UPNs via {alias}@WORKIQ_TENANT_DOMAIN.",
+  "team": {
+    "displayName": "Retail Mortgage Renewals FY26",
+    "description": "CFC Bank - 180-day mortgage renewal campaign. Branch leaders, advisors, pricing and risk.",
+    "visibility": "private",
+    "ownerAliases": [
+      "raj.balakrishnan"
+    ],
+    "memberAliases": [
+      "diane.lafleur",
+      "karen.whitfield",
+      "derek.fontaine",
+      "marcus.delaney",
+      "sophie.tremblay",
+      "nadia.osei",
+      "priya.raghavan",
+      "wei.zhang",
+      "fatima.haddad"
+    ]
+  },
+  "channels": [
+    {
+      "displayName": "Renewal Campaign - 180 Day",
+      "description": "Day-to-day execution of the 180-day renewal book.",
+      "conversations": [
+        {
+          "id": "TC-101",
+          "category": "executive_guidance",
+          "from": "raj.balakrishnan",
+          "createdDateTime": "2026-06-16T12:10:00Z",
+          "subject": "Campaign kickoff - the operating rhythm",
+          "message": "Kicking off the FY26 renewal campaign. Operating rhythm: Renewal Council every Monday 09:00, branch leaders bring maturity book plus capacity, advisors post blockers here rather than emailing me individually. Diane's three non-negotiables stand - retention over margin on relationship clients, no pricing below guardrail without documented competitor evidence, and proactive contact at 120 days not 30.",
+          "replies": [
+            {
+              "from": "marcus.delaney",
+              "createdDateTime": "2026-06-16T13:02:00Z",
+              "message": "Noted. Flagging now rather than at Council: BR-101 has 18 maturities inside 180 days and two advisors at roughly 70 active files each. The 120-day contact standard is not reachable at that ratio without help."
+            },
+            {
+              "from": "nadia.osei",
+              "createdDateTime": "2026-06-16T14:40:00Z",
+              "message": "Calgary's constraint is different. Capacity is fine, payment shock is the issue. A large share of my book originated 2021-22 near 2 percent on 25-year amortizations and is renewing into the high 4s. Payment increases of 70 to 130 percent."
+            },
+            {
+              "from": "sophie.tremblay",
+              "createdDateTime": "2026-06-16T15:25:00Z",
+              "message": "And Montreal's constraint is price. Caisses and credit unions quoting 30-40 bps under our floor and advertising it locally. Clients arrive with the competitor sheet printed."
+            }
+          ]
+        },
+        {
+          "id": "TC-102",
+          "category": "advisor_feedback",
+          "from": "priya.raghavan",
+          "createdDateTime": "2026-07-06T18:35:00Z",
+          "subject": "Renewal list is sorted wrong",
+          "message": "Process feedback. The renewal list is sorted by maturity date. It should be sorted by value at risk - balance times probability of leaving. Sorting by date means I spend Monday on a 210k file that will renew anyway and never get to the 780k file that is already shopping.",
+          "replies": [
+            {
+              "from": "wei.zhang",
+              "createdDateTime": "2026-07-06T19:01:00Z",
+              "message": "Agree. And I would add relationship depth to the sort. I have no view of deposits or investments on the renewal list, so I cannot see what I am actually defending."
+            },
+            {
+              "from": "fatima.haddad",
+              "createdDateTime": "2026-07-07T15:12:00Z",
+              "message": "Add payment shock as a sort dimension too. In Calgary that predicts the difficult conversations better than balance does."
+            },
+            {
+              "from": "raj.balakrishnan",
+              "createdDateTime": "2026-07-07T17:44:00Z",
+              "message": "Taking this to Council. Analytics can deliver a value-at-risk sort; I will ask for payment-shock and relationship-depth columns alongside it."
+            }
+          ]
+        },
+        {
+          "id": "TC-103",
+          "category": "advisor_feedback",
+          "from": "priya.raghavan",
+          "createdDateTime": "2026-07-08T16:05:00Z",
+          "subject": "The discount grid in the shared spreadsheet was stale again",
+          "message": "Second time in June I quoted from the weekly discount grid spreadsheet and it was out of date. I had to call the client back and revise the rate upward. That is a trust-destroying call at exactly the wrong moment. Can the grid live in one authoritative place with a visible effective date?",
+          "replies": [
+            {
+              "from": "derek.fontaine",
+              "createdDateTime": "2026-07-08T17:30:00Z",
+              "message": "Fair. Moving the grid to the Renewals SharePoint library with an effective-from stamp and version history. The spreadsheet distribution stops on Friday."
+            },
+            {
+              "from": "wei.zhang",
+              "createdDateTime": "2026-07-09T13:41:00Z",
+              "message": "Please publish it in French as well. I am translating terms live on client calls and I am not confident the wording is right."
+            }
+          ]
+        },
+        {
+          "id": "TC-104",
+          "category": "advisor_feedback",
+          "from": "fatima.haddad",
+          "createdDateTime": "2026-07-30T15:05:00Z",
+          "subject": "Clients ask about payment, we answer about rate",
+          "message": "Compiled patterns from roughly 40 renewal conversations. The number one client question is 'what is my new payment', not 'what is my rate'. Number two is 'can I lock in now'. Number three is 'can I get a shorter term'. Our script leads with rate and our discount grid is deepest on 5-year, so we are pushing people toward a term they do not want and answering a question they did not ask.",
+          "replies": [
+            {
+              "from": "wei.zhang",
+              "createdDateTime": "2026-07-30T16:20:00Z",
+              "message": "Same in Montreal. A one-page handout with new payment, payment change and three term options side by side would close more files than another 5 bps."
+            },
+            {
+              "from": "marcus.delaney",
+              "createdDateTime": "2026-07-30T18:11:00Z",
+              "message": "Supporting this. Also worth noting a lot of clients do not know that doing nothing rolls them to a posted rate. Several thought inaction was neutral."
+            },
+            {
+              "from": "karen.whitfield",
+              "createdDateTime": "2026-07-31T13:15:00Z",
+              "message": "If clients do not understand the consequence of inaction, that is a disclosure clarity issue as much as a sales one. I want to review the handout and the contact-centre script before either is scaled."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Branch Leaders Forum",
+      "description": "Branch manager level discussion - capacity, coverage, local market.",
+      "conversations": [
+        {
+          "id": "TC-201",
+          "category": "branch_leader_concern",
+          "from": "marcus.delaney",
+          "createdDateTime": "2026-06-23T13:20:00Z",
+          "subject": "Nobody owns broker-originated renewals",
+          "message": "Raising a gap. BR-101 has 6 broker-originated renewals in the 180-day book, about 2.4 million of balance. These clients have no relationship with the branch, do not return branch calls, and go straight back to their broker at maturity. The broker channel team says renewals are not theirs. So nobody owns them and they are effectively pre-lost.",
+          "replies": [
+            {
+              "from": "sophie.tremblay",
+              "createdDateTime": "2026-06-23T14:35:00Z",
+              "message": "Same pattern here, four files. Slotting them into the branch advisor queue guarantees they get worked last because the advisor has no history with the client."
+            },
+            {
+              "from": "nadia.osei",
+              "createdDateTime": "2026-06-23T16:50:00Z",
+              "message": "Three in Calgary. Agree they need a separate playbook - broker outreach, not branch outreach."
+            },
+            {
+              "from": "raj.balakrishnan",
+              "createdDateTime": "2026-06-24T12:05:00Z",
+              "message": "Acknowledged, this needs an owner. Taking it to Diane."
+            }
+          ]
+        },
+        {
+          "id": "TC-202",
+          "category": "branch_leader_concern",
+          "from": "sophie.tremblay",
+          "createdDateTime": "2026-07-02T14:02:00Z",
+          "subject": "French renewal portal is showing a stale rate table",
+          "message": "The French version of the renewal portal is displaying an old rate table while the English version is current. About 40 percent of my renewal book prefers French. Clients are seeing one number online and hearing another from the advisor. Beyond the client experience problem I think this is a disclosure issue.",
+          "replies": [
+            {
+              "from": "karen.whitfield",
+              "createdDateTime": "2026-07-02T15:44:00Z",
+              "message": "Confirming that is a disclosure defect, not a UX bug. Quebec clients must receive equivalent information. I need the date the French table was last accurate so we can size remediation."
+            },
+            {
+              "from": "sophie.tremblay",
+              "createdDateTime": "2026-07-03T13:10:00Z",
+              "message": "Checking with Digital. Preliminary answer is the French table has not refreshed since the June grid change."
+            }
+          ]
+        },
+        {
+          "id": "TC-203",
+          "category": "branch_leader_concern",
+          "from": "nadia.osei",
+          "createdDateTime": "2026-07-02T22:30:00Z",
+          "subject": "Advisors are improvising answers to 'should I just sell?'",
+          "message": "Three of Fatima's self-employed clients have raised selling the property rather than absorbing the payment increase. My advisors are improvising responses. That makes me uncomfortable from a suitability standpoint - we are not licensed to give that advice at the branch counter. I need approved language and a referral path.",
+          "replies": [
+            {
+              "from": "karen.whitfield",
+              "createdDateTime": "2026-07-03T12:22:00Z",
+              "message": "Strongly agree. Compliance will draft approved language plus a referral path to advice-qualified staff. Nothing improvised on this topic in the meantime, please."
+            },
+            {
+              "from": "marcus.delaney",
+              "createdDateTime": "2026-07-03T13:55:00Z",
+              "message": "Toronto has had two of these conversations as well. Not isolated to Calgary."
+            }
+          ]
+        },
+        {
+          "id": "TC-204",
+          "category": "branch_leader_concern",
+          "from": "marcus.delaney",
+          "createdDateTime": "2026-07-28T19:30:00Z",
+          "subject": "Advisors are treating the attrition score as gospel",
+          "message": "Cultural risk worth naming. Since the attrition scores appeared, my advisors have started skipping proactive contact entirely on any file scored Low. That is not what the score is for. A Low-attrition client with a 300k deposit balance still deserves a call. If we let the model decide who gets a relationship, we will lose someone expensive and be surprised by it.",
+          "replies": [
+            {
+              "from": "karen.whitfield",
+              "createdDateTime": "2026-07-29T12:40:00Z",
+              "message": "Good catch and it is also a model risk point. The score informs prioritisation, it does not authorise omission. I want that written into the advisor guidance explicitly."
+            },
+            {
+              "from": "diane.lafleur",
+              "createdDateTime": "2026-07-29T14:15:00Z",
+              "message": "Agreed. A low score suppresses urgency, not the relationship. Nobody with a material deposit balance goes uncontacted."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Pricing Exceptions",
+      "description": "Rate escalations, discretionary pricing requests and committee decisions.",
+      "conversations": [
+        {
+          "id": "TC-301",
+          "category": "rate_escalation",
+          "from": "wei.zhang",
+          "createdDateTime": "2026-07-13T18:10:00Z",
+          "subject": "RNW-5014 - 32 bps below guardrail, competitor letter in hand",
+          "message": "Escalating RNW-5014. Balance 612k, 5-year fixed maturing in 41 days, 11-year client with chequing, LOC and locked-in RRSP, about 190k household deposits. Written competitor offer at 4.62 against our 4.94 floor. Need 32 bps, which is 12 beyond the relationship-bundle maximum. Attrition band is High. Competitor commitment expires the 17th so I need a decision within 48 hours.",
+          "replies": [
+            {
+              "from": "derek.fontaine",
+              "createdDateTime": "2026-07-14T12:25:00Z",
+              "message": "Approved at 28 bps, conditional. Anything above 25 is a Pricing Committee decision so I took it to committee out of cycle. Conditions: competitor offer attached as a PDF, chequing stays the primary payment account for the term, and this is logged in the quarterly exception report to Risk."
+            },
+            {
+              "from": "wei.zhang",
+              "createdDateTime": "2026-07-14T13:05:00Z",
+              "message": "Understood, 28 works. PDF is on the file. Client accepted this morning."
+            },
+            {
+              "from": "derek.fontaine",
+              "createdDateTime": "2026-07-14T14:02:00Z",
+              "message": "Noting for the record this is the sixth exception out of BR-202 this quarter. If Montreal structurally needs a lower floor, that is a grid change, not six one-offs. Serial exceptions become a control finding."
+            }
+          ]
+        },
+        {
+          "id": "TC-302",
+          "category": "rate_escalation",
+          "from": "fatima.haddad",
+          "createdDateTime": "2026-07-20T16:55:00Z",
+          "subject": "What counts as competitor evidence?",
+          "message": "RNW-5033 client is showing me a phone screenshot of a competitor quote 22 bps under our floor. No letterhead, no client name. The exception procedure says documented evidence and Derek said a screenshot is not sufficient. So I either tell a 14-year client I do not believe them or grant nothing and watch them leave. Fourth time this month. We need one rule, because right now every advisor is deciding this differently.",
+          "replies": [
+            {
+              "from": "priya.raghavan",
+              "createdDateTime": "2026-07-20T18:20:00Z",
+              "message": "Confirming the same in Toronto. I have been accepting screenshots up to my discretion limit and requiring a letter beyond that, but that is my own rule, not a policy."
+            },
+            {
+              "from": "raj.balakrishnan",
+              "createdDateTime": "2026-07-22T11:40:00Z",
+              "message": "Settled at Council. Up to 20 bps a dated screenshot or advisor-attested verbal quote is acceptable and must be noted on file. Above 20 bps a written competitor commitment on letterhead or a lender portal PDF is mandatory."
+            },
+            {
+              "from": "karen.whitfield",
+              "createdDateTime": "2026-07-23T14:20:00Z",
+              "message": "Add that the rationale field is mandatory, not optional. Differential discounting without a recorded rationale is a fair-treatment exposure."
+            }
+          ]
+        },
+        {
+          "id": "TC-303",
+          "category": "rate_escalation",
+          "from": "fatima.haddad",
+          "createdDateTime": "2026-07-16T21:20:00Z",
+          "subject": "Three self-employed files - rate plus amortization relief",
+          "message": "Three Calgary files with the same shape. Self-employed, originated 2021-22 at 1.9 to 2.2, renewing into the high 4s, payment increase above 90 percent, all current, no arrears, none asking for additional funds. Each wants a rate concession and an amortization extension toward 30 years. The amortization change triggers a full credit re-test and self-employed income verification is taking nine business days. A monoline will do it without re-verifying because it is a straight renewal with no new money. Combined balance about 1.6 million.",
+          "replies": [
+            {
+              "from": "nadia.osei",
+              "createdDateTime": "2026-07-17T13:05:00Z",
+              "message": "Supporting the escalation. This is a pattern, not three files. We need a pre-approved path for current, no-new-money renewals."
+            },
+            {
+              "from": "karen.whitfield",
+              "createdDateTime": "2026-07-22T15:10:00Z",
+              "message": "Risk will support a fast path on strict conditions: same borrower, no increase in principal, and no extension beyond the original contractual amortization remaining. Break any one of those and it is a new underwriting decision with full B-20 income and debt-service testing."
+            },
+            {
+              "from": "raj.balakrishnan",
+              "createdDateTime": "2026-07-22T11:45:00Z",
+              "message": "Approved at Council on Karen's conditions. Credit Risk publishes the fast path this week; Fatima's three files are the pilot."
+            }
+          ]
+        },
+        {
+          "id": "TC-304",
+          "category": "rate_escalation",
+          "from": "sophie.tremblay",
+          "createdDateTime": "2026-07-31T18:15:00Z",
+          "subject": "Quebec grid decision needed - three files maturing inside 30 days",
+          "message": "Evidence pack is in the Renewals library: 11 competitor sheets. Median competitor 5-year fixed for a comparable uninsured renewal is 34 bps below our floor, two caisses are 41 bps below on relationship clients, and one monoline is winning our self-employed book on a 30-year amortization rather than on rate. My position is a Quebec floor about 20 bps below national plus the amortization flexibility holds the book. RNW-5008, RNW-5021 and RNW-5044 mature inside 30 days, about 1.4 million combined, and are waiting on this.",
+          "replies": [
+            {
+              "from": "derek.fontaine",
+              "createdDateTime": "2026-08-01T13:30:00Z",
+              "message": "Evidence received and it is sufficient. I will bring a recommendation, not options, to Council on the 10th. In the meantime the three named files can proceed at Branch Manager authority of 25 bps to avoid holding clients."
+            },
+            {
+              "from": "diane.lafleur",
+              "createdDateTime": "2026-08-01T12:05:00Z",
+              "message": "Endorsed. And a boundary for the whole campaign: if average discount across the book runs beyond 20 bps, escalate to me. That means the grid is wrong and we fix the grid rather than keep discounting."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+# Mortgage Renewal Concierge - Python dependencies
+#
+#   pip install -r requirements.txt
+
+# Azure auth - used by every script
+azure-identity==1.19.0
+
+# Fabric deployment + Graph seeding (REST over requests)
+requests>=2.32.0
+
+# Foundry IQ - AI Search index creation and querying
+azure-search-documents==11.5.2
+
+# The Foundry agent and its function tools
+azure-ai-agents==1.1.0
+
+# Optional: live Fabric SQL analytics endpoint path.
+# Only needed if you want the agent's SQL fallback instead of the semantic model.
+# Also requires the "ODBC Driver 18 for SQL Server" installed on the host.
+# pyodbc==5.2.0

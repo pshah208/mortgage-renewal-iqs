@@ -1,0 +1,272 @@
+<mxfile host="app.diagrams.net" modified="2026-08-04T16:00:00.000Z" agent="GitHub Copilot CLI" version="24.7.17" type="device">
+  <diagram id="mortgage-renewal-concierge" name="Mortgage Renewal Concierge">
+    <mxGraphModel dx="2400" dy="1500" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ================= TITLE ================= -->
+        <mxCell id="title" value="Mortgage Renewal Concierge — CFC Bank (synthetic demo)"
+          style="text;html=1;fontSize=26;fontStyle=1;fontColor=#1A1A1C;align=left;verticalAlign=middle;"
+          vertex="1" parent="1"><mxGeometry x="60" y="30" width="1200" height="34" as="geometry" /></mxCell>
+        <mxCell id="subtitle" value="One agent, four intelligence layers. Every downstream call runs as the signed-in user via On-Behalf-Of."
+          style="text;html=1;fontSize=14;fontColor=#71717A;align=left;verticalAlign=middle;"
+          vertex="1" parent="1"><mxGeometry x="60" y="62" width="1300" height="22" as="geometry" /></mxCell>
+
+        <!-- ================= ZONE 1 : USER ================= -->
+        <mxCell id="z1" value="1 — User &amp; identity"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F5F3;strokeColor=#D8D4D0;dashed=0;verticalAlign=top;align=left;spacingLeft=14;spacingTop=10;fontSize=13;fontStyle=1;fontColor=#52525B;arcSize=4;"
+          vertex="1" parent="1"><mxGeometry x="60" y="120" width="300" height="620" as="geometry" /></mxCell>
+
+        <mxCell id="user" value="Raj Balakrishnan&#10;VP, Real Estate Secured Lending"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=11;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/identity/Users.svg;"
+          vertex="1" parent="1"><mxGeometry x="155" y="175" width="60" height="49" as="geometry" /></mxCell>
+
+        <mxCell id="browser" value="Browser SPA&#10;React + MSAL"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=11;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/general/Browser.svg;"
+          vertex="1" parent="1"><mxGeometry x="155" y="300" width="60" height="47" as="geometry" /></mxCell>
+
+        <mxCell id="entra" value="Microsoft Entra ID&#10;SSO · PKCE · app roles"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=11;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/identity/Azure_Active_Directory.svg;"
+          vertex="1" parent="1"><mxGeometry x="155" y="425" width="60" height="53" as="geometry" /></mxCell>
+
+        <mxCell id="approles" value="App roles&#10;Executive · BranchManager · Advisor&#10;assignment required to sign in"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D8D4D0;fontSize=10;fontColor=#52525B;align=left;spacingLeft=8;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="88" y="540" width="244" height="58" as="geometry" /></mxCell>
+
+        <mxCell id="obonote" value="On-Behalf-Of&#10;the user's token is exchanged for a&#10;downstream token — the agent and every&#10;data source see the real person"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF4FB;strokeColor=#034694;fontSize=10;fontColor=#012A5E;align=left;spacingLeft=8;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="88" y="614" width="244" height="72" as="geometry" /></mxCell>
+
+        <!-- ================= ZONE 2 : EDGE + ACA ================= -->
+        <mxCell id="z2" value="2 — Azure edge &amp; application (rg-scotia-iqs · eastus2)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2F7FC;strokeColor=#BBD6EE;dashed=0;verticalAlign=top;align=left;spacingLeft=14;spacingTop=10;fontSize=13;fontStyle=1;fontColor=#1F4E79;arcSize=4;"
+          vertex="1" parent="1"><mxGeometry x="400" y="120" width="470" height="620" as="geometry" /></mxCell>
+
+        <mxCell id="apim" value="API Management&#10;throttling · policy · audit"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=11;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/app_services/API_Management_Services.svg;"
+          vertex="1" parent="1"><mxGeometry x="505" y="172" width="60" height="53" as="geometry" /></mxCell>
+
+        <mxCell id="apimnote" value="optional front door"
+          style="text;html=1;fontSize=9;fontColor=#71717A;align=left;"
+          vertex="1" parent="1"><mxGeometry x="580" y="190" width="120" height="16" as="geometry" /></mxCell>
+
+        <mxCell id="acaenv" value="Container Apps environment — cae-mrc"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0078D4;dashed=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;fontSize=11;fontStyle=1;fontColor=#1F4E79;arcSize=6;"
+          vertex="1" parent="1"><mxGeometry x="430" y="270" width="410" height="250" as="geometry" /></mxCell>
+
+        <mxCell id="web" value="ca-mrc-web&#10;nginx + SPA · external ingress"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=11;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/other/Container_App_Environments.svg;"
+          vertex="1" parent="1"><mxGeometry x="472" y="308" width="60" height="53" as="geometry" /></mxCell>
+
+        <mxCell id="bff" value="ca-mrc-bff&#10;FastAPI · internal only&#10;performs the OBO exchange"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=11;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/other/Worker_Container_App.svg;"
+          vertex="1" parent="1"><mxGeometry x="702" y="308" width="60" height="53" as="geometry" /></mxCell>
+
+        <mxCell id="ssenote" value="SSE stream — the IQ cards light up from the agent's real tool calls"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F5F3;strokeColor=#D8D4D0;fontSize=10;fontColor=#52525B;align=center;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="452" y="440" width="366" height="30" as="geometry" /></mxCell>
+
+        <mxCell id="acr" value="Container Registry&#10;crmrckk52iogx7e5qs"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=10;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/containers/Container_Registries.svg;"
+          vertex="1" parent="1"><mxGeometry x="468" y="558" width="48" height="42" as="geometry" /></mxCell>
+
+        <mxCell id="mi" value="Managed identity&#10;id-mrc"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=10;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/identity/Managed_Identities.svg;"
+          vertex="1" parent="1"><mxGeometry x="623" y="558" width="48" height="42" as="geometry" /></mxCell>
+
+        <mxCell id="kv" value="Key Vault&#10;secrets"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=10;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/security/Key_Vaults.svg;"
+          vertex="1" parent="1"><mxGeometry x="768" y="558" width="48" height="42" as="geometry" /></mxCell>
+
+        <!-- ================= ZONE 3 : FOUNDRY AGENT ================= -->
+        <mxCell id="z3" value="3 — Azure AI Foundry (rg-scotia-iqs · eastus)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBF4EC;strokeColor=#E7C9A2;dashed=0;verticalAlign=top;align=left;spacingLeft=14;spacingTop=10;fontSize=13;fontStyle=1;fontColor=#8A5A12;arcSize=4;"
+          vertex="1" parent="1"><mxGeometry x="910" y="120" width="330" height="620" as="geometry" /></mxCell>
+
+        <mxCell id="foundry" value="mortgage-iqs / proj-conceirge&#10;Foundry project"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=11;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/ai_machine_learning/AI_Studio.svg;"
+          vertex="1" parent="1"><mxGeometry x="1045" y="172" width="60" height="53" as="geometry" /></mxCell>
+
+        <mxCell id="agentbox" value="mortgage-renewal-concierge&#10;prompt agent · v14"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B45309;verticalAlign=top;align=center;spacingTop=10;fontSize=12;fontStyle=1;fontColor=#8A5A12;arcSize=6;"
+          vertex="1" parent="1"><mxGeometry x="940" y="285" width="270" height="235" as="geometry" /></mxCell>
+
+        <mxCell id="model" value="gpt-5.4"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=10;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/ai_machine_learning/Azure_OpenAI.svg;"
+          vertex="1" parent="1"><mxGeometry x="1051" y="322" width="48" height="42" as="geometry" /></mxCell>
+
+        <mxCell id="instr" value="Instructions · routing rules · citation discipline&#10;Responses API — POST /openai/responses"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBF4EC;strokeColor=#E7C9A2;fontSize=10;fontColor=#8A5A12;align=center;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="960" y="405" width="230" height="42" as="geometry" /></mxCell>
+
+        <mxCell id="mcpnote" value="Connections are MCP servers.&#10;The agent chooses which to call."
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D8D4D0;fontSize=10;fontColor=#52525B;align=center;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="960" y="458" width="230" height="42" as="geometry" /></mxCell>
+
+        <mxCell id="obs" value="Log Analytics&#10;App Insights"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=10;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/management_governance/Application_Insights.svg;"
+          vertex="1" parent="1"><mxGeometry x="1051" y="560" width="48" height="42" as="geometry" /></mxCell>
+
+        <!-- ================= ZONE 4 : THE FOUR IQs ================= -->
+        <mxCell id="z4" value="4 — The four Microsoft IQ layers"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FA;strokeColor=#CFC6E8;dashed=0;verticalAlign=top;align=left;spacingLeft=14;spacingTop=10;fontSize=13;fontStyle=1;fontColor=#4C3B8F;arcSize=4;"
+          vertex="1" parent="1"><mxGeometry x="1280" y="120" width="860" height="620" as="geometry" /></mxCell>
+
+        <!-- Work IQ -->
+        <mxCell id="workbox" value="Work IQ — how the team works"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7C3AED;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;fontSize=12;fontStyle=1;fontColor=#5B21B6;arcSize=6;"
+          vertex="1" parent="1"><mxGeometry x="1310" y="170" width="390" height="180" as="geometry" /></mxCell>
+
+        <mxCell id="m365" value="Microsoft 365&#10;Graph"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=10;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/general/Globe.svg;"
+          vertex="1" parent="1"><mxGeometry x="1341" y="208" width="48" height="48" as="geometry" /></mxCell>
+
+        <mxCell id="worksrc" value="Outlook — 18 campaign emails&#10;Teams — 43 messages, 3 channels&#10;SharePoint / OneDrive — 4 meeting records"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FA;strokeColor=#CFC6E8;fontSize=10;fontColor=#4C3B8F;align=left;spacingLeft=10;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1412" y="205" width="268" height="58" as="geometry" /></mxCell>
+
+        <mxCell id="worknote" value="Delegated — returns only what the signed-in user can see"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF4FB;strokeColor=#034694;fontSize=10;fontColor=#012A5E;align=center;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1330" y="300" width="350" height="26" as="geometry" /></mxCell>
+
+        <!-- Fabric IQ -->
+        <mxCell id="fabricbox" value="Fabric IQ — governed business data"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0F766E;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;fontSize=12;fontStyle=1;fontColor=#115E59;arcSize=6;"
+          vertex="1" parent="1"><mxGeometry x="1730" y="170" width="380" height="180" as="geometry" /></mxCell>
+
+        <mxCell id="onelake" value="OneLake&#10;Delta"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=10;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/analytics/Data_Lake_Store_Gen1.svg;"
+          vertex="1" parent="1"><mxGeometry x="1761" y="208" width="48" height="48" as="geometry" /></mxCell>
+
+        <mxCell id="semantic" value="Semantic&#10;model"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=10;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/analytics/Analysis_Services.svg;"
+          vertex="1" parent="1"><mxGeometry x="1856" y="208" width="48" height="48" as="geometry" /></mxCell>
+
+        <mxCell id="fabricsrc" value="ws-mortgage-renewals-demo&#10;sm_mortgage_renewals · Direct Lake&#10;7 Delta tables · 15 measures"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDFA;strokeColor=#99F6E4;fontSize=10;fontColor=#115E59;align=left;spacingLeft=10;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1925" y="205" width="170" height="58" as="geometry" /></mxCell>
+
+        <mxCell id="fabricnote" value="Same measures as the monthly CRO risk pack"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDFA;strokeColor=#0F766E;fontSize=10;fontColor=#115E59;align=center;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1750" y="300" width="340" height="26" as="geometry" /></mxCell>
+
+        <!-- Foundry IQ -->
+        <mxCell id="foundryiqbox" value="Foundry IQ — policy &amp; regulation"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B45309;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;fontSize=12;fontStyle=1;fontColor=#8A5A12;arcSize=6;"
+          vertex="1" parent="1"><mxGeometry x="1310" y="390" width="390" height="180" as="geometry" /></mxCell>
+
+        <mxCell id="aisearch" value="Azure AI&#10;Search"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=10;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/app_services/Search_Services.svg;"
+          vertex="1" parent="1"><mxGeometry x="1341" y="428" width="48" height="48" as="geometry" /></mxCell>
+
+        <mxCell id="policysrc" value="index: renewal-policies&#10;RP-001…RP-010 · semantic ranking&#10;pricing guardrails · approval matrix&#10;OSFI B-20 · E-21 · E-23"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBF4EC;strokeColor=#E7C9A2;fontSize=10;fontColor=#8A5A12;align=left;spacingLeft=10;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1412" y="418" width="268" height="70" as="geometry" /></mxCell>
+
+        <mxCell id="policynote" value="Answers &quot;what is allowed and who approves&quot;"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBF4EC;strokeColor=#B45309;fontSize=10;fontColor=#8A5A12;align=center;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1330" y="520" width="350" height="26" as="geometry" /></mxCell>
+
+        <!-- Web IQ -->
+        <mxCell id="webiqbox" value="Web IQ — external market signal"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1D4ED8;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;fontSize=12;fontStyle=1;fontColor=#1E3A8A;arcSize=6;"
+          vertex="1" parent="1"><mxGeometry x="1730" y="390" width="380" height="180" as="geometry" /></mxCell>
+
+        <mxCell id="bing" value="Grounding&#10;with Bing"
+          style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=10;fontColor=#3D3D42;verticalLabelPosition=bottom;verticalAlign=top;image=img/lib/azure2/general/Globe_Success.svg;"
+          vertex="1" parent="1"><mxGeometry x="1761" y="428" width="48" height="48" as="geometry" /></mxCell>
+
+        <mxCell id="websrc" value="Competitor rates · market context&#10;regulatory news"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#BFDBFE;fontSize=10;fontColor=#1E3A8A;align=left;spacingLeft=10;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1832" y="425" width="258" height="52" as="geometry" /></mxCell>
+
+        <mxCell id="webnote" value="The only layer that leaves the tenant"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1D4ED8;fontSize=10;fontColor=#1E3A8A;align=center;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1750" y="520" width="340" height="26" as="geometry" /></mxCell>
+
+        <!-- Data prep strip -->
+        <mxCell id="prepbox" value="Synthetic data preparation (one-time)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#D8D4D0;dashed=1;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;fontSize=11;fontStyle=1;fontColor=#52525B;arcSize=6;"
+          vertex="1" parent="1"><mxGeometry x="1310" y="600" width="800" height="110" as="geometry" /></mxCell>
+
+        <mxCell id="prep1" value="seed_work_iq.py&#10;Graph → mail, Teams, files"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CFC6E8;fontSize=10;fontColor=#4C3B8F;align=center;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1330" y="640" width="180" height="46" as="geometry" /></mxCell>
+        <mxCell id="prep2" value="deploy_fabric.py&#10;OneLake → tables → model"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#99F6E4;fontSize=10;fontColor=#115E59;align=center;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1525" y="640" width="180" height="46" as="geometry" /></mxCell>
+        <mxCell id="prep3" value="index_renewal_policies.py&#10;10 policy documents"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E7C9A2;fontSize=10;fontColor=#8A5A12;align=center;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1720" y="640" width="180" height="46" as="geometry" /></mxCell>
+        <mxCell id="prep4" value="Bicep + deploy.ps1&#10;infra &amp; images"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#BBD6EE;fontSize=10;fontColor=#1F4E79;align=center;arcSize=8;"
+          vertex="1" parent="1"><mxGeometry x="1915" y="640" width="180" height="46" as="geometry" /></mxCell>
+
+        <!-- ================= EDGES ================= -->
+        <mxCell id="e1" value="1 · sign in (PKCE)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#71717A;strokeWidth=2;fontSize=10;fontColor=#52525B;endArrow=block;endFill=1;" edge="1" parent="1" source="user" target="browser"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e2" value="2 · token" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#034694;strokeWidth=2;dashed=1;fontSize=10;fontColor=#012A5E;endArrow=block;endFill=1;" edge="1" parent="1" source="browser" target="entra"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e3" value="3 · HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#0078D4;strokeWidth=2;fontSize=10;fontColor=#1F4E79;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="browser" target="apim"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="382" y="323" /><mxPoint x="382" y="198" /></Array></mxGeometry></mxCell>
+
+        <mxCell id="e4" value="4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#0078D4;strokeWidth=2;fontSize=10;fontColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="apim" target="web"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e5" value="5 · /api proxied&#10;inside the environment" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#0078D4;strokeWidth=2;fontSize=10;fontColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="web" target="bff"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e6" value="6 · On-Behalf-Of exchange" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#034694;strokeWidth=2;dashed=1;fontSize=10;fontColor=#012A5E;endArrow=block;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="bff" target="entra"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="645" y="490" /><mxPoint x="382" y="490" /><mxPoint x="382" y="451" /></Array></mxGeometry></mxCell>
+
+        <mxCell id="e7" value="7 · run agent as the user" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#B45309;strokeWidth=3;fontSize=11;fontColor=#8A5A12;endArrow=block;endFill=1;" edge="1" parent="1" source="bff" target="foundry"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e8" value="8 · Work IQ" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#7C3AED;strokeWidth=2;fontSize=10;fontColor=#5B21B6;endArrow=block;endFill=1;" edge="1" parent="1" source="agentbox" target="workbox"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e9" value="9 · Fabric IQ" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#0F766E;strokeWidth=2;fontSize=10;fontColor=#115E59;endArrow=block;endFill=1;" edge="1" parent="1" source="agentbox" target="fabricbox"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1262" y="260" /><mxPoint x="1715" y="260" /></Array></mxGeometry></mxCell>
+
+        <mxCell id="e10" value="10 · Foundry IQ" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#B45309;strokeWidth=2;fontSize=10;fontColor=#8A5A12;endArrow=block;endFill=1;" edge="1" parent="1" source="agentbox" target="foundryiqbox"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e11" value="11 · Web IQ" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#1D4ED8;strokeWidth=2;fontSize=10;fontColor=#1E3A8A;endArrow=block;endFill=1;" edge="1" parent="1" source="agentbox" target="webiqbox"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1262" y="600" /><mxPoint x="1715" y="600" /></Array></mxGeometry></mxCell>
+
+        <mxCell id="e12" value="images" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#A1A1AA;strokeWidth=1;dashed=1;fontSize=9;fontColor=#71717A;endArrow=block;endFill=1;" edge="1" parent="1" source="acr" target="acaenv"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e13" value="telemetry" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#A1A1AA;strokeWidth=1;dashed=1;fontSize=9;fontColor=#71717A;endArrow=block;endFill=1;" edge="1" parent="1" source="bff" target="obs"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="862" y="334" /><mxPoint x="862" y="581" /></Array></mxGeometry></mxCell>
+
+        <!-- ================= LEGEND ================= -->
+        <mxCell id="legendbox" value="Legend"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D8D4D0;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;fontSize=12;fontStyle=1;fontColor=#52525B;arcSize=6;"
+          vertex="1" parent="1"><mxGeometry x="60" y="770" width="700" height="120" as="geometry" /></mxCell>
+
+        <mxCell id="lg1" value="Identity / On-Behalf-Of — the user's own permissions apply downstream"
+          style="text;html=1;fontSize=11;fontColor=#012A5E;align=left;" vertex="1" parent="1"><mxGeometry x="110" y="800" width="480" height="18" as="geometry" /></mxCell>
+        <mxCell id="lgl1" style="endArrow=none;html=1;strokeColor=#034694;strokeWidth=2;dashed=1;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="78" y="809" as="sourcePoint" /><mxPoint x="103" y="809" as="targetPoint" /></mxGeometry></mxCell>
+
+        <mxCell id="lg2" value="Request path — browser → APIM → web → BFF → agent"
+          style="text;html=1;fontSize=11;fontColor=#1F4E79;align=left;" vertex="1" parent="1"><mxGeometry x="110" y="826" width="480" height="18" as="geometry" /></mxCell>
+        <mxCell id="lgl2" style="endArrow=none;html=1;strokeColor=#0078D4;strokeWidth=2;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="78" y="835" as="sourcePoint" /><mxPoint x="103" y="835" as="targetPoint" /></mxGeometry></mxCell>
+
+        <mxCell id="lg3" value="Grounding — the agent decides which IQ layers to call per question"
+          style="text;html=1;fontSize=11;fontColor=#8A5A12;align=left;" vertex="1" parent="1"><mxGeometry x="110" y="852" width="480" height="18" as="geometry" /></mxCell>
+        <mxCell id="lgl3" style="endArrow=none;html=1;strokeColor=#B45309;strokeWidth=3;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="78" y="861" as="sourcePoint" /><mxPoint x="103" y="861" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- Key design notes -->
+        <mxCell id="notesbox" value="Design notes"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D8D4D0;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;fontSize=12;fontStyle=1;fontColor=#52525B;arcSize=6;"
+          vertex="1" parent="1"><mxGeometry x="790" y="770" width="1350" height="120" as="geometry" /></mxCell>
+
+        <mxCell id="n1" value="• &lt;b&gt;No data migration.&lt;/b&gt; Mortgage servicing, the customer master and the risk model stay in place; Fabric mirrors them into OneLake as governed measures."
+          style="text;html=1;fontSize=11;fontColor=#3D3D42;align=left;" vertex="1" parent="1"><mxGeometry x="810" y="798" width="1310" height="18" as="geometry" /></mxCell>
+        <mxCell id="n2" value="• &lt;b&gt;The BFF is never public.&lt;/b&gt; Internal ingress only; nginx proxies /api inside the Container Apps environment, so the client secret never faces the internet."
+          style="text;html=1;fontSize=11;fontColor=#3D3D42;align=left;" vertex="1" parent="1"><mxGeometry x="810" y="820" width="1310" height="18" as="geometry" /></mxCell>
+        <mxCell id="n3" value="• &lt;b&gt;Work IQ is delegated.&lt;/b&gt; Calling the agent with the app identity would return an empty but plausible answer — which is why On-Behalf-Of is a functional requirement, not just access control."
+          style="text;html=1;fontSize=11;fontColor=#3D3D42;align=left;" vertex="1" parent="1"><mxGeometry x="810" y="842" width="1310" height="18" as="geometry" /></mxCell>
+        <mxCell id="n4" value="• &lt;b&gt;Two RBAC planes.&lt;/b&gt; Entra app roles govern who may open the app; each data source independently authorises what that person may see."
+          style="text;html=1;fontSize=11;fontColor=#3D3D42;align=left;" vertex="1" parent="1"><mxGeometry x="810" y="864" width="1310" height="18" as="geometry" /></mxCell>
+
+        <!-- Disclaimer -->
+        <mxCell id="disclaimer" value="SYNTHETIC DEMO DATA — CFC Bank is used as a branding label only. No customer, balance, rate or policy shown here reflects real CFC Bank information. OSFI guideline numbers are real public guidelines cited by name only."
+          style="text;html=1;fontSize=10;fontColor=#7C2D12;align=left;verticalAlign=middle;fillColor=#FFF7ED;strokeColor=#FED7AA;rounded=1;arcSize=8;spacingLeft=10;"
+          vertex="1" parent="1"><mxGeometry x="60" y="910" width="2080" height="30" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

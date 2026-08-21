@@ -1,0 +1,51 @@
+renewal_id,customer_id,segment,attrition_risk_score,attrition_risk_band,renewal_likelihood_pct,top_risk_drivers,competitor_rate_gap_bps,rate_shopping_signal,service_complaint_last_12m,annual_revenue_exposure_cad,five_year_lifetime_value_cad,recommended_offer_id,model_version,scored_on
+RNW-5001,CUST-1001,Mass Affluent,0.633,Medium,36.7,Competitor rate gap; Payment shock at renewal; Rate-shopping signal detected,30,Y,N,8179,38542,OFR-08,attrition-renewal-v2.3,2026-08-03
+RNW-5002,CUST-1002,New to Canada,0.481,Medium,51.9,Payment shock at renewal; Low digital engagement; Short tenure with bank,18,N,N,8007,28032,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5003,CUST-1003,Mass Affluent,0.4,Medium,60.0,Payment shock at renewal,0,N,N,6515,30264,OFR-02,attrition-renewal-v2.3,2026-08-03
+RNW-5004,CUST-1004,Self-Employed,0.542,Medium,45.8,Competitor rate gap; Payment shock at renewal; Rate-shopping signal detected,20,Y,N,7924,39270,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5005,CUST-1005,Mass Market,0.379,Low,62.1,Payment shock at renewal,15,N,N,3617,13500,OFR-01,attrition-renewal-v2.3,2026-08-03
+RNW-5006,CUST-1006,Mass Market,0.533,Medium,46.7,Payment shock at renewal; Single-product relationship,5,N,N,4627,16115,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5007,CUST-1007,Self-Employed,0.538,Medium,46.2,Single-product relationship,15,N,N,6354,21642,OFR-02,attrition-renewal-v2.3,2026-08-03
+RNW-5008,CUST-1008,Mass Affluent,0.785,High,21.5,Competitor rate gap; Payment shock at renewal; Low digital engagement,35,Y,N,7699,30278,OFR-08,attrition-renewal-v2.3,2026-08-03
+RNW-5009,CUST-1009,Mass Market,0.812,High,18.8,Competitor rate gap; Payment shock at renewal; Single-product relationship,25,Y,N,3891,13360,OFR-08,attrition-renewal-v2.3,2026-08-03
+RNW-5010,CUST-1010,High Net Worth,0.513,Medium,48.7,Payment shock at renewal; Low digital engagement; Broker-originated relationship,15,N,N,15643,68580,OFR-05,attrition-renewal-v2.3,2026-08-03
+RNW-5011,CUST-1011,Mass Market,0.705,High,29.5,Payment shock at renewal; Single-product relationship; Broker-originated relationship,5,N,N,3130,11453,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5012,CUST-1012,Mass Affluent,0.499,Medium,50.1,Payment shock at renewal,18,N,N,7416,36441,OFR-02,attrition-renewal-v2.3,2026-08-03
+RNW-5013,CUST-1013,Mass Affluent,0.455,Medium,54.5,Payment shock at renewal; Broker-originated relationship,12,N,N,7860,29048,OFR-02,attrition-renewal-v2.3,2026-08-03
+RNW-5014,CUST-1014,Mass Affluent,0.68,High,32.0,Competitor rate gap; Payment shock at renewal; Rate-shopping signal detected,32,Y,Y,7232,26741,OFR-08,attrition-renewal-v2.3,2026-08-03
+RNW-5015,CUST-1015,Self-Employed,0.501,Medium,49.9,Competitor rate gap; Payment shock at renewal; Broker-originated relationship,25,N,N,10201,50672,OFR-02,attrition-renewal-v2.3,2026-08-03
+RNW-5016,CUST-1016,Self-Employed,0.648,Medium,35.2,Payment shock at renewal; Single-product relationship; Low digital engagement,0,N,N,5769,24790,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5017,CUST-1017,Mass Affluent,0.497,Medium,50.3,Competitor rate gap; Payment shock at renewal,20,N,N,8062,35860,OFR-02,attrition-renewal-v2.3,2026-08-03
+RNW-5018,CUST-1018,High Net Worth,0.351,Low,64.9,Payment shock at renewal,18,N,N,14122,60237,OFR-05,attrition-renewal-v2.3,2026-08-03
+RNW-5019,CUST-1019,Mass Market,0.366,Low,63.4,Payment shock at renewal; Low digital engagement,0,N,N,4317,20993,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5020,CUST-1020,Mass Market,0.359,Low,64.1,Short tenure with bank,0,N,N,5844,25067,OFR-03,attrition-renewal-v2.3,2026-08-03
+RNW-5021,CUST-1021,Mass Market,0.89,High,11.0,Competitor rate gap; Payment shock at renewal; Low digital engagement,38,Y,N,7748,33061,OFR-08,attrition-renewal-v2.3,2026-08-03
+RNW-5022,CUST-1022,Mass Market,0.594,Medium,40.6,Payment shock at renewal; Single-product relationship; Low digital engagement,0,N,Y,6978,25617,OFR-03,attrition-renewal-v2.3,2026-08-03
+RNW-5023,CUST-1023,Self-Employed,0.417,Medium,58.3,Payment shock at renewal; Broker-originated relationship,0,N,N,9518,43030,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5024,CUST-1024,High Net Worth,0.444,Medium,55.6,Payment shock at renewal; Low digital engagement; Broker-originated relationship,18,N,N,15241,71168,OFR-05,attrition-renewal-v2.3,2026-08-03
+RNW-5025,CUST-1025,Self-Employed,0.492,Medium,50.8,Competitor rate gap; Rate-shopping signal detected,25,Y,N,12691,60010,OFR-02,attrition-renewal-v2.3,2026-08-03
+RNW-5026,CUST-1026,New to Canada,0.6,Medium,40.0,Payment shock at renewal; Single-product relationship; Short tenure with bank,10,N,N,8675,41545,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5027,CUST-1027,Self-Employed,0.518,Medium,48.2,Payment shock at renewal; Broker-originated relationship,5,N,N,8370,39395,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5028,CUST-1028,New to Canada,0.97,High,3.0,Competitor rate gap; Payment shock at renewal; Single-product relationship,25,Y,N,5005,24942,OFR-01,attrition-renewal-v2.3,2026-08-03
+RNW-5029,CUST-1029,New to Canada,0.517,Medium,48.3,Single-product relationship,12,N,N,6645,30082,OFR-01,attrition-renewal-v2.3,2026-08-03
+RNW-5030,CUST-1030,Mass Affluent,0.536,Medium,46.4,Competitor rate gap; Payment shock at renewal,35,N,N,10135,48891,OFR-02,attrition-renewal-v2.3,2026-08-03
+RNW-5031,CUST-1031,Mass Affluent,0.513,Medium,48.7,Competitor rate gap; Rate-shopping signal detected,25,Y,N,9336,38865,OFR-08,attrition-renewal-v2.3,2026-08-03
+RNW-5032,CUST-1032,New to Canada,0.509,Medium,49.1,Payment shock at renewal; Low digital engagement; Short tenure with bank,5,N,N,5711,27834,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5033,CUST-1033,Mass Market,0.924,High,7.6,Competitor rate gap; Payment shock at renewal; Single-product relationship,22,Y,Y,4990,23851,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5034,CUST-1034,Mass Market,0.865,High,13.5,Competitor rate gap; Payment shock at renewal; Low digital engagement,30,Y,Y,4598,19031,OFR-08,attrition-renewal-v2.3,2026-08-03
+RNW-5035,CUST-1035,Mass Market,0.629,Medium,37.1,Competitor rate gap; Payment shock at renewal; Single-product relationship,35,N,N,4139,15265,OFR-01,attrition-renewal-v2.3,2026-08-03
+RNW-5036,CUST-1036,Mass Affluent,0.418,Medium,58.2,Payment shock at renewal,10,N,N,10158,50531,OFR-02,attrition-renewal-v2.3,2026-08-03
+RNW-5037,CUST-1037,New to Canada,0.534,Medium,46.6,Payment shock at renewal; Broker-originated relationship; Short tenure with bank,10,N,N,7534,32550,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5038,CUST-1038,High Net Worth,0.371,Low,62.9,Competitor rate gap; Payment shock at renewal,20,N,N,10212,49898,OFR-05,attrition-renewal-v2.3,2026-08-03
+RNW-5039,CUST-1039,Mass Market,0.575,Medium,42.5,Payment shock at renewal; Single-product relationship,15,N,N,6581,23497,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5040,CUST-1040,Mass Market,0.874,High,12.6,Competitor rate gap; Payment shock at renewal; Single-product relationship,30,Y,N,5289,21703,OFR-08,attrition-renewal-v2.3,2026-08-03
+RNW-5041,CUST-1041,Mass Affluent,0.591,Medium,40.9,Competitor rate gap; Payment shock at renewal; Rate-shopping signal detected,35,Y,N,10293,43107,OFR-08,attrition-renewal-v2.3,2026-08-03
+RNW-5042,CUST-1042,Mass Market,0.758,High,24.2,Competitor rate gap; Payment shock at renewal; Single-product relationship,30,Y,N,3099,11268,OFR-08,attrition-renewal-v2.3,2026-08-03
+RNW-5043,CUST-1043,Mass Market,0.427,Medium,57.3,Payment shock at renewal,5,N,N,6061,21016,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5044,CUST-1044,Mass Market,0.821,High,17.9,Competitor rate gap; Payment shock at renewal; Rate-shopping signal detected,41,Y,N,6885,27881,OFR-08,attrition-renewal-v2.3,2026-08-03
+RNW-5045,CUST-1045,Mass Affluent,0.519,Medium,48.1,Competitor rate gap; Payment shock at renewal,40,N,N,10547,51279,OFR-02,attrition-renewal-v2.3,2026-08-03
+RNW-5046,CUST-1046,Mass Affluent,0.476,Medium,52.4,Payment shock at renewal; Recent service complaint,5,N,Y,8478,36914,OFR-02,attrition-renewal-v2.3,2026-08-03
+RNW-5047,CUST-1047,New to Canada,0.736,High,26.4,Competitor rate gap; Payment shock at renewal; Rate-shopping signal detected,35,Y,N,10486,51057,OFR-01,attrition-renewal-v2.3,2026-08-03
+RNW-5048,CUST-1048,New to Canada,0.522,Medium,47.8,Payment shock at renewal; Single-product relationship,5,N,N,6853,28495,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5049,CUST-1049,Mass Market,0.396,Low,60.4,Payment shock at renewal; Low digital engagement,5,N,N,4128,20202,OFR-07,attrition-renewal-v2.3,2026-08-03
+RNW-5050,CUST-1050,New to Canada,0.923,High,7.7,Competitor rate gap; Payment shock at renewal; Single-product relationship,35,Y,Y,6942,27660,OFR-01,attrition-renewal-v2.3,2026-08-03

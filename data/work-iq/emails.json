@@ -1,0 +1,346 @@
+{
+  "$schema_note": "SYNTHETIC DEMO DATA. Work IQ corpus for the Mortgage Renewal Concierge. CFC Bank is used only as a branding label - no person, customer, figure or policy here reflects real CFC Bank data. UPNs use the {TENANT_DOMAIN} placeholder which seed_work_iq.py substitutes from the WORKIQ_TENANT_DOMAIN environment variable.",
+  "scenario": "CFC Bank - FY26 180-day mortgage renewal campaign",
+  "as_of": "2026-08-03",
+  "people": [
+    {
+      "alias": "diane.lafleur",
+      "displayName": "Diane Lafleur",
+      "title": "EVP, Personal Banking",
+      "role": "executive"
+    },
+    {
+      "alias": "raj.balakrishnan",
+      "displayName": "Raj Balakrishnan",
+      "title": "VP, Real Estate Secured Lending",
+      "role": "executive"
+    },
+    {
+      "alias": "karen.whitfield",
+      "displayName": "Karen Whitfield",
+      "title": "Chief Risk Officer",
+      "role": "executive"
+    },
+    {
+      "alias": "derek.fontaine",
+      "displayName": "Derek Fontaine",
+      "title": "Director, Mortgage Pricing",
+      "role": "pricing"
+    },
+    {
+      "alias": "marcus.delaney",
+      "displayName": "Marcus Delaney",
+      "title": "Branch Manager, Toronto Bay & Bloor (BR-101)",
+      "role": "branch_leader"
+    },
+    {
+      "alias": "sophie.tremblay",
+      "displayName": "Sophie Tremblay",
+      "title": "Branch Manager, Montreal Plateau (BR-202)",
+      "role": "branch_leader"
+    },
+    {
+      "alias": "nadia.osei",
+      "displayName": "Nadia Osei",
+      "title": "Branch Manager, Calgary Centre Street (BR-303)",
+      "role": "branch_leader"
+    },
+    {
+      "alias": "priya.raghavan",
+      "displayName": "Priya Raghavan",
+      "title": "Mortgage Advisor (ADV-012)",
+      "role": "advisor"
+    },
+    {
+      "alias": "wei.zhang",
+      "displayName": "Wei Zhang",
+      "title": "Senior Mortgage Advisor (ADV-021)",
+      "role": "advisor"
+    },
+    {
+      "alias": "fatima.haddad",
+      "displayName": "Fatima Haddad",
+      "title": "Senior Mortgage Advisor (ADV-031)",
+      "role": "advisor"
+    }
+  ],
+  "emails": [
+    {
+      "id": "EM-001",
+      "category": "executive_guidance",
+      "from": "diane.lafleur",
+      "to": [
+        "raj.balakrishnan",
+        "marcus.delaney",
+        "sophie.tremblay",
+        "nadia.osei",
+        "derek.fontaine"
+      ],
+      "cc": [
+        "karen.whitfield"
+      ],
+      "sentDateTime": "2026-06-15T13:05:00Z",
+      "importance": "high",
+      "subject": "FY26 renewal season - our three non-negotiables",
+      "body": "Team,\n\nWe have roughly 22 million dollars of balance maturing in the next two quarters across the three pilot branches, and it is the largest low-rate vintage we will ever renew. Most of these clients originated at 1.8 to 3.2 percent and will be offered something starting with a 4. Assume every one of them will shop.\n\nThree non-negotiables for this campaign:\n\n1. Retention over margin on relationship clients. If a client holds three or more products with us, we protect the relationship first. I would rather give away 15 basis points than lose the deposit and the investment account behind it.\n2. Nobody goes below the guardrail without a documented competitor offer. Derek's pricing grid is the floor. Verbal claims from a client are not evidence.\n3. Contact 120 days out, not 30. Our data says a client contacted inside 45 days of maturity is already talking to someone else.\n\nRaj will run a weekly Renewal Council. Branch leaders, please bring your maturity book and your capacity picture, not just your wins.\n\nDiane"
+    },
+    {
+      "id": "EM-002",
+      "category": "branch_leader_concern",
+      "from": "marcus.delaney",
+      "to": [
+        "raj.balakrishnan"
+      ],
+      "cc": [
+        "diane.lafleur"
+      ],
+      "sentDateTime": "2026-06-22T20:41:00Z",
+      "importance": "high",
+      "subject": "BR-101 capacity - we cannot cover the 180-day book with two advisors",
+      "body": "Raj,\n\nI have to be blunt about Bay and Bloor. We are carrying 18 maturities inside 180 days, and my two advisors are already sitting at about 70 active files each between renewals, new originations and refinance requests. The 120-day proactive contact standard Diane set is not achievable at that ratio.\n\nWhat I am seeing on the ground:\n\n- The high-value files are getting the attention, which is right, but the Mass Market book is essentially going untouched until the maturity letter goes out automatically at 30 days. That is exactly where we are bleeding.\n- Liam has three High Net Worth files that each need two or three sit-downs. Those alone eat a week.\n- We lost a 640k file last month purely because nobody called until day 22.\n\nI need either a floating advisor for the quarter or permission to route the sub-300k renewals to the contact centre with a scripted offer. Doing nothing means we miss the target and the advisors burn out.\n\nMarcus"
+    },
+    {
+      "id": "EM-003",
+      "category": "branch_leader_concern",
+      "from": "sophie.tremblay",
+      "to": [
+        "raj.balakrishnan",
+        "derek.fontaine"
+      ],
+      "cc": [
+        "diane.lafleur"
+      ],
+      "sentDateTime": "2026-06-25T14:12:00Z",
+      "importance": "normal",
+      "subject": "Montreal - credit union pricing is 30 to 40 bps under us",
+      "body": "Raj, Derek,\n\nSituation in the Plateau is different from Toronto. It is not capacity, it is price. The local caisses and two credit unions are quoting 5-year fixed at 30 to 40 basis points below our posted-less-discount rate, and they are advertising it on bus shelters two blocks from my branch. My clients are walking in with the competitor sheet printed.\n\nCamille had four clients in one week ask her to match a rate that is 35 bps under our floor. Our guardrail lets her go to 15. So the conversation ends with 'let me escalate' and the client leaves the branch without a decision. Two of those four have since asked for a payout statement.\n\nI also want to flag a service dimension: about 40 percent of my renewal book prefers French. The automated maturity letters and the digital renewal flow are English-first, and the French version of the renewal portal still shows the old rate table. That is both a client experience problem and, I suspect, a compliance one.\n\nCan we look at a Quebec-specific defence rate for the maturities inside 90 days?\n\nSophie"
+    },
+    {
+      "id": "EM-004",
+      "category": "branch_leader_concern",
+      "from": "nadia.osei",
+      "to": [
+        "raj.balakrishnan"
+      ],
+      "cc": [
+        "karen.whitfield"
+      ],
+      "sentDateTime": "2026-07-02T22:03:00Z",
+      "importance": "high",
+      "subject": "Calgary - payment shock is the real objection, not rate",
+      "body": "Raj,\n\nCalgary Centre Street's issue is neither capacity nor competitor pricing. It is payment shock. A meaningful slice of my 180-day book is self-employed clients who originated in 2021 and 2022 at around 2 percent on 25-year amortizations. Renewing at 4.8 to 5.2 puts their monthly payment up 70 to 130 percent.\n\nFatima has had three clients tell her outright they are considering selling. Two more asked about extending amortization back to 30 years, which we can do but it requires a credit re-test and Fatima says the turnaround is running 6 to 9 business days. By then the client has an offer from a monoline.\n\nMy asks:\n\n1. Pre-approve amortization relief for renewal clients who are current on payments and are not increasing the loan amount. We should not be re-underwriting a straight renewal.\n2. Give me a payment-shock flag in the advisor dashboard so we prioritise those files, not just the big balances.\n3. Some guidance on what we say when a client asks 'should I just sell?' - my advisors are improvising and that makes me nervous from a suitability standpoint.\n\nNadia"
+    },
+    {
+      "id": "EM-005",
+      "category": "advisor_feedback",
+      "from": "priya.raghavan",
+      "to": [
+        "marcus.delaney"
+      ],
+      "sentDateTime": "2026-07-06T18:22:00Z",
+      "importance": "normal",
+      "subject": "Feedback from the front line - the discount approval loop is killing us",
+      "body": "Marcus,\n\nYou asked for honest feedback on the renewal process. Here it is.\n\nThe single biggest problem is the approval loop for anything beyond my 15 bps of advisor discretion. I submit the exception, it goes to you, then to Pricing, and I typically get an answer in 3 to 5 business days. A client sitting across from me with a competitor commitment letter will not wait 3 to 5 days. I have lost two files this quarter for that reason alone.\n\nSecond, I have no visibility into what the client is actually worth to the bank. I can see the mortgage balance. I cannot see the deposits, the investment book or the small business account. So when I decide whether to fight for a file I am guessing. Twice I have discovered after the fact that a client I let go was a top-decile relationship.\n\nThird, the renewal list I get is sorted by maturity date. It should be sorted by value at risk. Balance times risk of leaving. That is a five-minute change and it would change how I spend my week.\n\nWhat is working: the 120-day early lock is landing well. Clients like the certainty and about half of them accept on the first call.\n\nLiam"
+    },
+    {
+      "id": "EM-006",
+      "category": "advisor_feedback",
+      "from": "priya.raghavan",
+      "to": [
+        "marcus.delaney",
+        "derek.fontaine"
+      ],
+      "sentDateTime": "2026-07-08T15:47:00Z",
+      "importance": "normal",
+      "subject": "RE: Renewal advisor survey - my notes",
+      "body": "Following up on my own note to you earlier this week.\n\nThe rate is not always the objection. Roughly half my conversations end up being about flexibility, not price - prepayment privileges, portability, whether they can skip a payment. We have those features and we are terrible at leading with them. The renewal script leads with the number, which invites a rate fight we cannot win against a monoline.\n\nOn the tooling: I keep three things open to have one conversation. The renewal list in the mortgage system, the client 360 view for products held, and a spreadsheet Derek's team publishes weekly with the current discount grid. The grid version in the spreadsheet was out of date twice in June and I quoted a rate I then had to walk back. That is an embarrassing call to make.\n\nOne more thing. Broker-originated renewals behave completely differently. Those clients have no relationship with the branch, do not answer our calls, and go straight back to the broker. We should treat them as a separate campaign with a different playbook, not slot them into the branch advisor queue.\n\nPriya"
+    },
+    {
+      "id": "EM-007",
+      "category": "advisor_feedback",
+      "from": "wei.zhang",
+      "to": [
+        "sophie.tremblay"
+      ],
+      "cc": [
+        "derek.fontaine"
+      ],
+      "sentDateTime": "2026-07-09T13:30:00Z",
+      "importance": "normal",
+      "subject": "Retention des renouvellements - retour terrain / front line feedback",
+      "body": "Sophie,\n\n(EN below.)\n\nLes clients arrivent avec l'offre du concurrent imprimee. Mon pouvoir discretionnaire de 15 points de base ne suffit pas dans le marche montrealais. Je perds la conversation au moment ou je dois dire 'je dois escalader'.\n\nEnglish for Derek: clients arrive with the competitor offer printed. My 15 bps of discretion is not enough in the Montreal market. I lose the conversation at the moment I have to say 'I need to escalate'.\n\nSpecific asks:\n1. Raise advisor discretion to 20 bps in Quebec for the duration of the campaign, or give branch managers same-day authority to 25.\n2. Publish the discount grid in French. I am translating it live on calls and I am not confident the terms are right.\n3. The cashback offer converts better here than a rate discount for first-time renewers. Clients understand 1500 dollars today better than 15 basis points over five years. Let us lean on that.\n\nCamille"
+    },
+    {
+      "id": "EM-008",
+      "category": "rate_escalation",
+      "from": "wei.zhang",
+      "to": [
+        "sophie.tremblay",
+        "derek.fontaine"
+      ],
+      "cc": [
+        "raj.balakrishnan"
+      ],
+      "sentDateTime": "2026-07-13T17:55:00Z",
+      "importance": "high",
+      "subject": "ESCALATION - RNW-5014 rate exception request, 32 bps below guardrail",
+      "body": "Escalating per the pricing exception procedure.\n\nFile: RNW-5014. Balance 612,000. 5-year fixed maturing in 41 days. Client has been with CFC Bank 11 years, holds a chequing account, a line of credit and a locked-in RRSP. Household deposits roughly 190,000.\n\nThe client has a written offer from a competitor at 4.62 percent. Our guardrail floor for this profile is 4.94. To match we need 32 basis points, which is 12 beyond the 20 bps relationship-bundle maximum.\n\nSupporting rationale: five-year lifetime value on this relationship is materially above the annual mortgage margin we would give up. Attrition score on the file is High. The client has explicitly said the mortgage is the anchor and the rest of the relationship follows it.\n\nI need a decision within 48 hours. The competitor commitment expires on the 17th.\n\nWei"
+    },
+    {
+      "id": "EM-009",
+      "category": "rate_escalation",
+      "from": "derek.fontaine",
+      "to": [
+        "wei.zhang",
+        "sophie.tremblay"
+      ],
+      "cc": [
+        "raj.balakrishnan",
+        "karen.whitfield"
+      ],
+      "sentDateTime": "2026-07-14T12:18:00Z",
+      "importance": "high",
+      "subject": "RE: ESCALATION - RNW-5014 rate exception request, 32 bps below guardrail",
+      "body": "Wei,\n\nDecision: approved at 28 bps, not 32, and the approval is conditional.\n\nReasoning. Anything beyond 25 bps is a Pricing Committee decision under the discretionary pricing matrix, not a Director decision, so I have taken this to committee out of cycle. Committee's position:\n\n- 28 bps gets us to 4.66, which is within 4 bps of the competitor. Evidence says we do not need to match to the penny when the relationship is 11 years deep.\n- Condition 1: the competitor offer must be attached to the file as a PDF. A screenshot is not sufficient documentation under the exception procedure.\n- Condition 2: the client must maintain the chequing account as the primary payment account for the full term. If it moves, the discount is subject to review at the next anniversary.\n- Condition 3: this is logged as a documented exception and will appear in the quarterly pricing exception report that goes to Risk.\n\nOne broader note for Sophie. This is the sixth exception request out of BR-202 this quarter. If the Montreal market genuinely requires a structurally lower floor, that is a pricing grid conversation, not six individual exceptions. I would rather change the grid than keep granting one-offs, because the exception volume itself is becoming a control finding.\n\nDerek"
+    },
+    {
+      "id": "EM-010",
+      "category": "rate_escalation",
+      "from": "fatima.haddad",
+      "to": [
+        "nadia.osei",
+        "derek.fontaine"
+      ],
+      "sentDateTime": "2026-07-16T21:09:00Z",
+      "importance": "high",
+      "subject": "ESCALATION - three self-employed files needing amortization relief plus rate",
+      "body": "Nadia, Derek,\n\nThree files, same shape, escalating together because the pattern matters more than any one file.\n\nAll three are self-employed clients, all originated 2021 to 2022 at 1.9 to 2.2 percent, all renewing into the high 4s, all facing a payment increase above 90 percent. All three are current, no arrears, no missed payments. None are asking for additional funds.\n\nEach has asked for two things: a rate concession and an amortization extension back toward 30 years to soften the payment.\n\nMy problem is that the amortization change triggers a full credit re-test through Credit Risk, and self-employed income verification is slow. Last one took nine business days. Two of these three have already been quoted by a monoline that will do the amortization extension without re-verifying income because it is a straight renewal with no new money.\n\nIs there a path to pre-approved amortization relief for current, no-new-money renewals? If not, I will lose all three, and that is about 1.6 million in balance.\n\nFatima"
+    },
+    {
+      "id": "EM-011",
+      "category": "rate_escalation",
+      "from": "fatima.haddad",
+      "to": [
+        "nadia.osei"
+      ],
+      "cc": [
+        "derek.fontaine"
+      ],
+      "sentDateTime": "2026-07-20T16:40:00Z",
+      "importance": "normal",
+      "subject": "Rate match request - competitor evidence is a screenshot, do I proceed?",
+      "body": "Nadia,\n\nProcess question that is going to keep coming up.\n\nClient on RNW-5033 is showing me a phone screenshot of a competitor's rate quote, 22 bps under our floor. It is not on letterhead and there is no client name on it. Under the exception procedure I need documented evidence, and Derek's note last week said a screenshot is not sufficient.\n\nSo my choice is to tell a 14-year client I do not believe them, or to grant nothing and watch them leave. Neither is a good outcome and I have had this exact conversation four times this month.\n\nCan we get a clear rule? For example: screenshots acceptable up to 15 bps, formal commitment letter required beyond that. Right now every advisor is deciding this differently, which is the thing an audit will find.\n\nJonas"
+    },
+    {
+      "id": "EM-012",
+      "category": "executive_guidance",
+      "from": "raj.balakrishnan",
+      "to": [
+        "marcus.delaney",
+        "sophie.tremblay",
+        "nadia.osei",
+        "derek.fontaine"
+      ],
+      "cc": [
+        "diane.lafleur",
+        "karen.whitfield"
+      ],
+      "sentDateTime": "2026-07-22T11:30:00Z",
+      "importance": "high",
+      "subject": "Renewal Council decisions - week of 20 July",
+      "body": "Decisions and directions out of Monday's Renewal Council. These are effective immediately and stand until the end of the campaign.\n\n1. Advisor discretion moves from 15 to 20 basis points nationally for renewals inside 180 days. Branch Manager authority moves to 25 bps with same-day turnaround. Anything above 25 remains Pricing Committee.\n\n2. Evidence standard is now explicit. Up to 20 bps, a dated screenshot or advisor-attested verbal quote is acceptable and must be noted in the file. Above 20 bps, a written competitor commitment on letterhead or lender portal PDF is mandatory. Fatima, this answers your question - please share with the advisor group.\n\n3. Amortization relief on straight renewals. Karen has agreed that where the client is current, is not increasing the principal and is not changing the borrower, we treat it as a straight renewal and do not re-underwrite. Credit Risk will publish the fast path this week. Fatima's three Calgary files are the pilot.\n\n4. Prioritisation. Renewal lists will be re-sorted by value at risk - balance times attrition probability - not by maturity date. Priya raised this and she is right. Analytics is delivering it for the 1st.\n\n5. Montreal pricing. Derek will bring a proposed Quebec regional grid to the next Council rather than continuing to process one-off exceptions. Sophie, please send Derek your last ten competitor sheets as evidence.\n\n6. Capacity. Marcus gets a floating advisor for Q3 funded centrally. In exchange BR-101 pilots contact-centre handling for sub-300k renewals with a scripted offer, with results reported back in four weeks.\n\nNot approved: a blanket rate match. We are not doing that.\n\nRaj"
+    },
+    {
+      "id": "EM-013",
+      "category": "executive_guidance",
+      "from": "karen.whitfield",
+      "to": [
+        "raj.balakrishnan",
+        "derek.fontaine"
+      ],
+      "cc": [
+        "diane.lafleur"
+      ],
+      "sentDateTime": "2026-07-23T14:05:00Z",
+      "importance": "high",
+      "subject": "Risk guardrails on the renewal campaign - read before you widen discretion further",
+      "body": "Raj,\n\nI support the decisions from Council, with four risk conditions attached.\n\nFirst, exception volume is itself a risk indicator. We granted 41 pricing exceptions across three branches last quarter against a book that size. If we normalise exceptions we have effectively moved the grid without governance. Derek's instinct to fix the Quebec grid rather than grant serial exceptions is the correct one.\n\nSecond, on the amortization relief fast path. I agreed to it on the specific basis that it applies only to straight renewals with the same borrower, no increase in principal and no change in the amortization beyond the original contractual schedule remaining. If any of those three conditions break, it is a new underwriting decision and OSFI B-20 expectations for income verification and debt-service testing apply in full. I do not want to discover in an internal audit that 'straight renewal' was interpreted loosely.\n\nThird, we must watch aggregate LTV and the uninsured share as we retain. Retaining a high-LTV, high-payment-shock cohort at a discounted rate concentrates exactly the exposure our B-20 portfolio limits exist to control. I want the monthly renewal pack to show retained volume split by LTV band and by payment-shock band, not just retention rate.\n\nFourth, the attrition model.It is driving offers to clients, so it is in scope for model risk management under OSFI E-23. I need confirmation that attrition-renewal-v2.3 has been through validation, that we can explain a score to a client if asked, and that we are not using any prohibited attribute directly or by proxy. Compliance will also want the privacy assessment on the behavioural signals.\n\nHappy to be constructive - just do not let speed outrun the controls.\n\nKaren"
+    },
+    {
+      "id": "EM-014",
+      "category": "executive_guidance",
+      "from": "karen.whitfield",
+      "to": [
+        "raj.balakrishnan",
+        "sophie.tremblay"
+      ],
+      "sentDateTime": "2026-07-24T15:20:00Z",
+      "importance": "normal",
+      "subject": "Compliance items on the renewal campaign - French disclosure and fair treatment",
+      "body": "Two compliance items that came out of Sophie's note.\n\n1. French-language renewal disclosure. If the renewal portal is showing a stale rate table in French while the English version is current, that is a disclosure defect, not just a UX bug. Quebec clients must receive equivalent information. Please treat the portal fix as priority and confirm the date the French rate table was last accurate so we can size any remediation.\n\n2. Fair treatment of clients at renewal. Two things worry me in the advisor feedback. First, advisors improvising an answer to 'should I sell my house' - that is bordering on advice we are not licensed to give at the branch counter. We need approved language and a referral path. Second, differential discounting. If two clients with the same risk profile get different rates purely because one complained louder, we have a fair-treatment problem. The move to a documented evidence standard helps; please make sure the rationale field is mandatory, not optional.\n\nI would also like the renewal script reviewed before it is scaled to the contact centre.\n\nHelena"
+    },
+    {
+      "id": "EM-015",
+      "category": "branch_leader_concern",
+      "from": "marcus.delaney",
+      "to": [
+        "raj.balakrishnan",
+        "derek.fontaine"
+      ],
+      "cc": [
+        "diane.lafleur"
+      ],
+      "sentDateTime": "2026-07-28T19:15:00Z",
+      "importance": "normal",
+      "subject": "Two weeks in - what is working and what is still broken at BR-101",
+      "body": "Raj,\n\nQuick honest read two weeks after Council.\n\nWorking: the 20 bps advisor discretion has closed four files that would otherwise have escalated. The value-at-risk sorted list is not live yet but Analytics gave us a manual cut and it immediately surfaced three files nobody was working.\n\nStill broken:\n\n1. The floating advisor has not been assigned yet. HR says two more weeks. My people are still at 70 files.\n2. Broker-originated renewals. Priya was right. We have 6 of them in the 180-day book, none have answered a branch call, and the broker channel team says they do not own renewals. So nobody owns them. That is roughly 2.4 million of balance with no owner.\n3. Payment-shock clients want certainty faster than we give it. The amortization fast path is announced but Credit Risk has not published the actual form yet.\n\nOne cultural observation. My advisors have started treating the attrition score as gospel. A client scored Low is getting no proactive call at all. I do not think that is what was intended, and it will bite us when a Low-scored client with a big deposit balance walks.\n\nMarcus"
+    },
+    {
+      "id": "EM-016",
+      "category": "advisor_feedback",
+      "from": "fatima.haddad",
+      "to": [
+        "nadia.osei",
+        "marcus.delaney",
+        "sophie.tremblay"
+      ],
+      "sentDateTime": "2026-07-30T14:50:00Z",
+      "importance": "normal",
+      "subject": "What clients are actually asking us at renewal - patterns from ~40 conversations",
+      "body": "Sharing patterns from about 40 renewal conversations across the three branches this month, compiled with Liam, Priya, Wei and Camille.\n\nWhat clients ask, in order of frequency:\n\n1. 'What is my new payment?' - not what is my rate. Payment is the unit of anxiety. We lead with rate. That is a mismatch.\n2. 'Can I lock in now?' - strong appetite for certainty. The 120-day lock is our best product and it is under-marketed.\n3. 'What can you do about the term?' - a lot of clients want 2 or 3 years, not 5, because they expect rates to fall. Our discount grid is deepest on 5-year, so we are pushing clients toward a term they do not want.\n4. 'Why is your rate higher than the one on the comparison site?' - clients are anchoring on advertised insured rates and comparing them to our uninsured renewal offer. We have no good one-liner for this.\n5. 'What happens if I do nothing?' - a surprising number do not know they roll to a posted rate. Some of them think doing nothing is neutral.\n\nBiggest single fix we would ask for: put the new payment, the payment change, and the three term options side by side on one page we can hand to the client. Everything else is secondary.\n\nJonas"
+    },
+    {
+      "id": "EM-017",
+      "category": "rate_escalation",
+      "from": "sophie.tremblay",
+      "to": [
+        "derek.fontaine",
+        "raj.balakrishnan"
+      ],
+      "cc": [
+        "karen.whitfield"
+      ],
+      "sentDateTime": "2026-07-31T18:02:00Z",
+      "importance": "high",
+      "subject": "Quebec grid evidence pack - 11 competitor sheets attached in the renewals library",
+      "body": "Derek,\n\nAs requested, I have put 11 competitor sheets in the Renewals SharePoint library under Competitive Intelligence. Summary:\n\n- Median competitor 5-year fixed for a comparable uninsured renewal profile: 34 bps below our current floor.\n- Two caisses are at 41 bps below on relationship clients.\n- One monoline is not competing on rate at all but is offering a 30-year amortization on straight renewals, which is winning our self-employed clients.\n\nMy position: we do not need to match the lowest quote. We need a Quebec floor about 20 bps below the national floor, plus the amortization flexibility, and I believe we hold the book. Continuing with one-off exceptions costs us the same margin but takes five days per file and loses us clients in the meantime.\n\nI have three files waiting on this decision that mature in under 30 days: RNW-5008, RNW-5021 and RNW-5044. Combined balance about 1.4 million. I need direction by Wednesday or I will escalate them individually, which I know Karen does not want.\n\nSophie"
+    },
+    {
+      "id": "EM-018",
+      "category": "executive_guidance",
+      "from": "diane.lafleur",
+      "to": [
+        "raj.balakrishnan",
+        "derek.fontaine",
+        "karen.whitfield",
+        "marcus.delaney",
+        "sophie.tremblay",
+        "nadia.osei"
+      ],
+      "sentDateTime": "2026-08-01T12:00:00Z",
+      "importance": "high",
+      "subject": "Where we are, and what I want in the next 60 days",
+      "body": "Thank you all for a candid month. My read, and then what I want.\n\nMy read. The campaign is directionally working but we are solving it file by file when the problems are structural. Three structural problems have been named repeatedly and I consider them the real agenda: advisor capacity at BR-101, competitor pricing in Quebec, and payment shock among self-employed clients in Calgary. Everything else is a symptom.\n\nWhat I want in the next 60 days.\n\n1. Derek brings a Quebec regional grid to Council on the 10th with a recommendation, not options. Sophie's evidence pack is sufficient. If the answer is a 20 bps regional floor, say so and we will decide.\n2. Credit Risk publishes the amortization relief fast path by the 7th. Karen's three conditions - same borrower, no new principal, no extension beyond the original contractual amortization - are the boundary and I do not want them stretched.\n3. Marcus's floating advisor is assigned this week. Raj, please unblock with HR personally.\n4. Broker-originated renewals get an owner by Friday. Six files with no owner is an unforced error. I am assigning it to the Broker Channel lead.\n5. Value-at-risk sorted lists go live for the 1st, and Marcus's warning is noted - a Low attrition score suppresses outbound contact, it does not suppress the relationship. Nobody with a material deposit balance goes uncontacted.\n6. Karen's monthly renewal pack requirement is approved. Retention split by LTV band and payment-shock band, and confirmation that the attrition model has completed validation.\n\nOn margin. I said retention over margin for relationship clients and I meant it, but that is not a licence to buy the book. If we are giving away more than 20 basis points on average across the campaign, come and tell me, because that means the grid is wrong and the answer is to fix the grid, not to keep discounting.\n\nDiane"
+    }
+  ]
+}

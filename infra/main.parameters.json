@@ -1,0 +1,64 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "description": "Mirrors the LIVE estate as verified against Azure on 2026-08-21. Every create* flag is FALSE because the resources already exist - this makes the template idempotent against the live estate rather than trying to recreate it. NOTE the estate spans three resource groups and three regions: Foundry + platform in rg-scotia-iqs (eastus), AI Search in rg-mortgage-iq (canadacentral), Fabric capacity in rg-Fabric (centralus). For a clean-room rebuild use main.parameters.greenfield.json."
+  },
+  "parameters": {
+    "workload":        { "value": "mtgrenewal" },
+    "environmentName": { "value": "dev" },
+    "location":        { "value": "eastus" },
+
+    "createSearch":            { "value": false },
+    "searchServiceName":       { "value": "aisearchrgmortgageiqa7d3b8" },
+    "searchResourceGroupName": { "value": "rg-mortgage-iq" },
+    "searchLocation":          { "value": "canadacentral" },
+    "searchSku":               { "value": "standard" },
+    "searchSemanticTier":      { "value": "free" },
+    "searchEnableAadAuth":     { "value": false },
+
+    "createFoundry":           { "value": false },
+    "foundryAccountName":      { "value": "mortgage-iqs" },
+    "foundryProjectName":      { "value": "proj-conceirge" },
+    "foundryDisableLocalAuth": { "value": true },
+
+    "deployModel":         { "value": true },
+    "modelDeploymentName": { "value": "gpt-5.4" },
+    "modelName":           { "value": "gpt-5.4" },
+    "modelVersion":        { "value": "2026-03-05" },
+    "modelCapacity":       { "value": 250 },
+
+    "deployEmbeddingModel":     { "value": true },
+    "embeddingDeploymentName":  { "value": "text-embedding-3-small" },
+    "embeddingModelName":       { "value": "text-embedding-3-small" },
+    "embeddingModelVersion":    { "value": "1" },
+    "embeddingSku":             { "value": "Standard" },
+    "embeddingCapacity":        { "value": 120 },
+
+    "manageFoundryPlatform":     { "value": true },
+    "createFoundryStorage":      { "value": false },
+    "foundryStorageAccountName": { "value": "bnsiqs" },
+    "createFoundryKeyVault":     { "value": false },
+    "foundryKeyVaultName":       { "value": "kvrgscotiaiqsa7d3b8" },
+    "createFoundryAppInsights":  { "value": false },
+    "foundryAppInsightsName":    { "value": "airgscotiaiqsa7d3b8" },
+    "attachUserOwnedStorage":    { "value": true },
+
+    "createFabricCapacity":    { "value": false },
+    "fabricCapacityName":      { "value": "fabcap26" },
+    "fabricResourceGroupName": { "value": "rg-Fabric" },
+    "fabricLocation":          { "value": "centralus" },
+    "fabricSkuName":           { "value": "F8" },
+    "fabricAdminMembers":      { "value": [ "admin@m365cpi65678641.onmicrosoft.com" ] },
+
+    "agentPrincipalId":   { "value": "" },
+    "agentPrincipalType": { "value": "User" },
+
+    "extraTags": {
+      "value": {
+        "demo": "mortgage-renewal-concierge",
+        "costCentre": "demo"
+      }
+    }
+  }
+}

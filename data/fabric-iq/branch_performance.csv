@@ -1,0 +1,4 @@
+branch_id,branch_name,province,branch_manager,renewals_next_180d,balance_maturing_cad,high_risk_count,annual_revenue_at_risk_cad,retention_rate_last_quarter_pct,avg_discount_granted_bps,advisor_capacity_files_per_fte,as_of_date
+BR-101,Toronto Bay & Bloor,ON,Marcus Delaney,18,10502000,4,147882,79.5,9,66,2026-08-03
+BR-202,Montreal Plateau,QC,Sophie Tremblay,16,6970000,7,104916,84.1,20,66,2026-08-03
+BR-303,Calgary Centre Street,AB,Nadia Osei,16,8971000,2,126937,79.1,19,67,2026-08-03

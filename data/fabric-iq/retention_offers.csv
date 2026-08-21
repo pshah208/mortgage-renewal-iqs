@@ -1,0 +1,9 @@
+offer_id,offer_name,eligible_segments,max_discount_bps,cashback_cad,required_approval_level,notes
+OFR-01,Loyalty Rate Match,Mass Market|Mass Affluent|New to Canada,15,0,Advisor,Matches a documented written competitor offer up to 15 bps.
+OFR-02,Relationship Bundle Discount,Mass Affluent|High Net Worth|Self-Employed,20,0,Branch Manager,"Requires 3+ products held, including a chequing account."
+OFR-03,Early Renewal Lock (120-day),Mass Market|Mass Affluent|New to Canada|Self-Employed,10,0,Advisor,Locks the posted-less-discount rate up to 120 days before maturity.
+OFR-04,Cashback Retention Offer,Mass Market|New to Canada,0,1500,Branch Manager,Cash incentive in lieu of a rate discount; clawback on early payout.
+OFR-05,Private Wealth Preferred Pricing,High Net Worth,35,0,Regional Director,HNW only; requires investable assets >= CAD 1M held at CFC Bank.
+OFR-06,Blend & Extend,Mass Affluent|High Net Worth|Self-Employed,12,0,Branch Manager,Blends the existing rate with the new term; no re-qualification for a straight blend.
+OFR-07,Amortization Relief Renewal,Mass Market|New to Canada|Self-Employed,5,0,Credit Risk,Extends amortization to ease payment shock; TDS/GDS re-test required.
+OFR-08,Switch-In Defence Pricing,Mass Market|Mass Affluent,25,500,Pricing Committee,Deployed only where a confirmed competitor switch package exists.
