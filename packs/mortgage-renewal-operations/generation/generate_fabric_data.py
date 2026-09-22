@@ -27,18 +27,18 @@ OUT = Path(__file__).parent
 random.seed(SEED)
 
 BRANCHES = [
-    ("BR-101", "Toronto Bay & Bloor", "ON", "Marcus Delaney"),
-    ("BR-202", "Montreal Plateau", "QC", "Sophie Tremblay"),
-    ("BR-303", "Calgary Centre Street", "AB", "Nadia Osei"),
+    ("BR-101", "Branch 101", "ON", "Branch Manager 101"),
+    ("BR-202", "Branch 202", "QC", "Branch Manager 202"),
+    ("BR-303", "Branch 303", "AB", "Branch Manager 303"),
 ]
 
 ADVISORS = [
-    ("ADV-011", "Liam O'Connor", "BR-101"),
-    ("ADV-012", "Priya Raghavan", "BR-101"),
-    ("ADV-021", "Wei Zhang", "BR-202"),
-    ("ADV-022", "Camille Fortin", "BR-202"),
-    ("ADV-031", "Fatima Haddad", "BR-303"),
-    ("ADV-032", "Jonas Berg", "BR-303"),
+    ("ADV-011", "Advisor 011", "BR-101"),
+    ("ADV-012", "Advisor 012", "BR-101"),
+    ("ADV-021", "Advisor 021", "BR-202"),
+    ("ADV-022", "Advisor 022", "BR-202"),
+    ("ADV-031", "Advisor 031", "BR-303"),
+    ("ADV-032", "Advisor 032", "BR-303"),
 ]
 
 SEGMENTS = [
@@ -56,26 +56,6 @@ PRODUCTS = [
     ("2-Year Fixed Closed", 0.08, 24),
     ("5-Year Variable Closed", 0.18, 60),
     ("1-Year Fixed Closed", 0.08, 12),
-]
-
-FIRST = [
-    "Aiden", "Mei", "Rahul", "Chloe", "Tomas", "Ingrid", "Kwame", "Sofia", "Hassan",
-    "Emily", "Andre", "Yuki", "Olivier", "Nadia", "Dmitri", "Grace", "Samuel",
-    "Amara", "Lucas", "Farah", "Noah", "Isabelle", "Ravi", "Anika", "Etienne",
-    "Marta", "Jae-won", "Beatrice", "Omar", "Helena", "Diego", "Sana", "Felix",
-    "Naomi", "Viktor", "Leila", "Caleb", "Rosa", "Tariq", "Josephine", "Mateo",
-    "Ayesha", "Gustav", "Simone", "Nikhil", "Clara", "Bruno", "Zainab", "Henrik",
-    "Valeria",
-]
-LAST = [
-    "Whitmore", "Chen", "Deshpande", "Beaulieu", "Novak", "Larsen", "Mensah",
-    "Rossi", "Karim", "Turner", "Gagnon", "Tanaka", "Lachance", "Petrov",
-    "Adeyemi", "Boucher", "Okonkwo", "Sinclair", "Moreau", "Haddadi", "Bergeron",
-    "Nakamura", "Iyer", "Kowalski", "Dufresne", "Silva", "Park", "Ellsworth",
-    "Farouk", "Vasquez", "Marchetti", "Rahman", "Brandt", "Fitzgerald", "Sokolov",
-    "Benali", "Thibault", "Guerrero", "Aziz", "Lindqvist", "Castellanos",
-    "Siddiqui", "Hoffmann", "Leclair", "Mehta", "Vandenberg", "Costa", "Yusuf",
-    "Solberg", "Cardoso",
 ]
 
 OFFERS = [
@@ -290,7 +270,7 @@ def main() -> None:
         ov = NARRATIVE_OVERRIDES.get(renewal_id, {})
 
         while True:
-            name = f"{random.choice(FIRST)} {random.choice(LAST)}"
+            name = f"Customer {i:03d}"
             if name not in used_names:
                 used_names.add(name)
                 break
