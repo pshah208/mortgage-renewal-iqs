@@ -1,0 +1,60 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Gold As Of",
+        "type": "TridentNotebook",
+        "dependsOn": [],
+        "typeProperties": {
+          "notebookId": "__GOLD_ASOF_NOTEBOOK_ID__",
+          "workspaceId": "__WORKSPACE_ID__"
+        }
+      },
+      {
+        "name": "Gold Renewal Portfolio",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {"activity": "Gold As Of", "dependencyConditions": ["Succeeded"]}
+        ],
+        "typeProperties": {
+          "notebookId": "__RENEWAL_PORTFOLIO_NOTEBOOK_ID__",
+          "workspaceId": "__WORKSPACE_ID__"
+        }
+      },
+      {
+        "name": "Gold Risk Signal",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {"activity": "Gold Renewal Portfolio", "dependencyConditions": ["Succeeded"]}
+        ],
+        "typeProperties": {
+          "notebookId": "__RISK_SIGNAL_NOTEBOOK_ID__",
+          "workspaceId": "__WORKSPACE_ID__"
+        }
+      },
+      {
+        "name": "Gold Offer Coverage",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {"activity": "Gold Risk Signal", "dependencyConditions": ["Succeeded"]}
+        ],
+        "typeProperties": {
+          "notebookId": "__OFFER_COVERAGE_NOTEBOOK_ID__",
+          "workspaceId": "__WORKSPACE_ID__"
+        }
+      },
+      {
+        "name": "Gold Branch Performance",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {"activity": "Gold Offer Coverage", "dependencyConditions": ["Succeeded"]}
+        ],
+        "typeProperties": {
+          "notebookId": "__BRANCH_PERFORMANCE_NOTEBOOK_ID__",
+          "workspaceId": "__WORKSPACE_ID__"
+        }
+      }
+    ]
+  }
+}
+

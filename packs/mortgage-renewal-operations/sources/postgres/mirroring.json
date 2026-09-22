@@ -1,0 +1,22 @@
+{
+  "properties": {
+    "source": {
+      "type": "AzurePostgreSql",
+      "typeProperties": {
+        "connection": "{{ .CONNECTION_ID }}",
+        "database": "{{ .DATABASE }}"
+      }
+    },
+    "target": {
+      "type": "MountedRelationalDatabase",
+      "typeProperties": {
+        "defaultSchema": "mortgage_operations",
+        "format": "Delta",
+        "retentionInDays": 1,
+        "enableDeltaChangeDataFeed": false,
+        "lakehousePath": "Files/ingest/postgres/mortgage_operations"
+      }
+    },
+    "mountedTables": []
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "schema": "mortgage_operations",
+  "tables": [
+    {"source_name": "mortgage_renewals", "raw_name": "mortgage_renewals"}
+  ]
+}
+

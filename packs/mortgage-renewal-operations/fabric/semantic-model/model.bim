@@ -1,0 +1,158 @@
+{
+  "name": "Mortgage Renewal Operations Intelligence",
+  "compatibilityLevel": 1604,
+  "model": {
+    "name": "Mortgage Renewal Operations Intelligence",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "annotations": [
+      {
+        "name": "PackId",
+        "value": "mortgage-renewal-operations"
+      },
+      {
+        "name": "RiskBoundary",
+        "value": "Risk score is a derived signal for prioritization, not a decision."
+      }
+    ],
+    "tables": [
+      {
+        "name": "Renewal Portfolio",
+        "columns": [
+          {"name": "Renewal ID", "dataType": "string", "sourceColumn": "renewal_id"},
+          {"name": "Customer ID", "dataType": "string", "sourceColumn": "customer_id"},
+          {"name": "Segment", "dataType": "string", "sourceColumn": "segment"},
+          {"name": "Province", "dataType": "string", "sourceColumn": "province"},
+          {"name": "Branch ID", "dataType": "string", "sourceColumn": "branch_id"},
+          {"name": "Branch", "dataType": "string", "sourceColumn": "branch_name"},
+          {"name": "Maturity Date", "dataType": "dateTime", "sourceColumn": "maturity_date"},
+          {"name": "Days to Maturity", "dataType": "int64", "sourceColumn": "days_to_maturity"},
+          {"name": "Mortgage Balance CAD", "dataType": "double", "sourceColumn": "mortgage_balance_cad"},
+          {"name": "LTV Pct", "dataType": "double", "sourceColumn": "ltv_pct"},
+          {"name": "Payment Shock Pct", "dataType": "double", "sourceColumn": "payment_shock_pct"},
+          {"name": "Risk Score", "dataType": "double", "sourceColumn": "attrition_risk_score"},
+          {"name": "Risk Band", "dataType": "string", "sourceColumn": "attrition_risk_band"},
+          {"name": "Renewal Likelihood Pct", "dataType": "double", "sourceColumn": "renewal_likelihood_pct"},
+          {"name": "Revenue Exposure CAD", "dataType": "double", "sourceColumn": "annual_revenue_exposure_cad"},
+          {"name": "Lifetime Value CAD", "dataType": "double", "sourceColumn": "five_year_lifetime_value_cad"},
+          {"name": "Recommended Offer ID", "dataType": "string", "sourceColumn": "recommended_offer_id"},
+          {"name": "Recommended Offer", "dataType": "string", "sourceColumn": "recommended_offer"},
+          {"name": "Model Version", "dataType": "string", "sourceColumn": "model_version"},
+          {"name": "Source As Of Date", "dataType": "dateTime", "sourceColumn": "as_of_date"}
+        ],
+        "measures": [
+          {"name": "Renewals in 180 Days", "expression": "COUNTROWS('Renewal Portfolio')", "formatString": "#,0"},
+          {"name": "Balance Maturing", "expression": "SUM('Renewal Portfolio'[Mortgage Balance CAD])", "formatString": "\"CAD \"#,0"},
+          {"name": "Annual Revenue Exposure", "expression": "SUM('Renewal Portfolio'[Revenue Exposure CAD])", "formatString": "\"CAD \"#,0"},
+          {"name": "Value at Risk", "expression": "SUMX('Renewal Portfolio', 'Renewal Portfolio'[Revenue Exposure CAD] * 'Renewal Portfolio'[Risk Score])", "formatString": "\"CAD \"#,0"},
+          {"name": "High Risk Renewals", "expression": "CALCULATE(COUNTROWS('Renewal Portfolio'), 'Renewal Portfolio'[Risk Band] = \"High\")", "formatString": "#,0"},
+          {"name": "Average Renewal Likelihood", "expression": "AVERAGE('Renewal Portfolio'[Renewal Likelihood Pct])", "formatString": "0.0"}
+        ],
+        "partitions": [
+          {
+            "name": "Renewal Portfolio",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "renewal_portfolio",
+              "expressionSource": "DirectLake",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Risk Summary",
+        "columns": [
+          {"name": "Risk Band", "dataType": "string", "sourceColumn": "attrition_risk_band"},
+          {"name": "Maturity Bucket", "dataType": "string", "sourceColumn": "maturity_bucket"},
+          {"name": "Renewal Count", "dataType": "int64", "sourceColumn": "renewal_count"},
+          {"name": "Balance Maturing CAD", "dataType": "double", "sourceColumn": "balance_maturing_cad"},
+          {"name": "Revenue Exposure CAD", "dataType": "double", "sourceColumn": "annual_revenue_exposure_cad"},
+          {"name": "Risk Signal Note", "dataType": "string", "sourceColumn": "risk_signal_note"}
+        ],
+        "partitions": [
+          {
+            "name": "Risk Summary",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "renewal_risk_summary",
+              "expressionSource": "DirectLake",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Offer Coverage",
+        "columns": [
+          {"name": "Offer ID", "dataType": "string", "sourceColumn": "recommended_offer_id"},
+          {"name": "Offer", "dataType": "string", "sourceColumn": "recommended_offer"},
+          {"name": "Approval Level", "dataType": "string", "sourceColumn": "required_approval_level"},
+          {"name": "Renewal Count", "dataType": "int64", "sourceColumn": "renewal_count"},
+          {"name": "Balance Maturing CAD", "dataType": "double", "sourceColumn": "balance_maturing_cad"},
+          {"name": "High Risk Count", "dataType": "int64", "sourceColumn": "high_risk_count"}
+        ],
+        "partitions": [
+          {
+            "name": "Offer Coverage",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "offer_coverage",
+              "expressionSource": "DirectLake",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Branch Performance",
+        "columns": [
+          {"name": "Branch ID", "dataType": "string", "sourceColumn": "branch_id"},
+          {"name": "Branch", "dataType": "string", "sourceColumn": "branch_name"},
+          {"name": "Province", "dataType": "string", "sourceColumn": "province"},
+          {"name": "Renewals Next 180 Days", "dataType": "int64", "sourceColumn": "renewals_next_180d"},
+          {"name": "Balance Maturing CAD", "dataType": "double", "sourceColumn": "balance_maturing_cad"},
+          {"name": "High Risk Count", "dataType": "int64", "sourceColumn": "high_risk_count"},
+          {"name": "Retention Rate Last Quarter Pct", "dataType": "double", "sourceColumn": "retention_rate_last_quarter_pct"},
+          {"name": "Source As Of Date", "dataType": "dateTime", "sourceColumn": "as_of_date"}
+        ],
+        "partitions": [
+          {
+            "name": "Branch Performance",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "branch_renewal_performance",
+              "expressionSource": "DirectLake",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "Renewal Portfolio to Offer Coverage",
+        "fromTable": "Renewal Portfolio",
+        "fromColumn": "Recommended Offer ID",
+        "toTable": "Offer Coverage",
+        "toColumn": "Offer ID",
+        "fromCardinality": "Many",
+        "toCardinality": "One",
+        "crossFilteringBehavior": "OneDirection"
+      },
+      {
+        "name": "Renewal Portfolio to Branch Performance",
+        "fromTable": "Renewal Portfolio",
+        "fromColumn": "Branch ID",
+        "toTable": "Branch Performance",
+        "toColumn": "Branch ID",
+        "fromCardinality": "Many",
+        "toCardinality": "One",
+        "crossFilteringBehavior": "OneDirection"
+      }
+    ]
+  }
+}
