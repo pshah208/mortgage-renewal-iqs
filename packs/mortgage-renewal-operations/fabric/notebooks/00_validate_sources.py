@@ -43,4 +43,3 @@ if invalid_window.limit(1).count():
     raise RuntimeError("mortgage_renewals contains rows outside the 0-180 day window")
 
 print("source validation succeeded")
-

@@ -16,4 +16,3 @@ CREATE TABLE IF NOT EXISTS mortgage_signals.renewal_risk_scores (
   scored_on DATE NOT NULL,
   CONSTRAINT renewal_risk_scores_pk PRIMARY KEY (renewal_id)
 ) USING DELTA;
-

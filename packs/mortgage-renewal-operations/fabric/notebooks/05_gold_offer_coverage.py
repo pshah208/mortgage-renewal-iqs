@@ -21,4 +21,3 @@ offers = (
 offers.write.format("delta").mode("overwrite").option(
     "overwriteSchema", "true"
 ).saveAsTable("gold.offer_coverage")
-

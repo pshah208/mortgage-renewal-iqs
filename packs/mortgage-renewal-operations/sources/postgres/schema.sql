@@ -23,4 +23,3 @@ CREATE TABLE IF NOT EXISTS mortgage_operations.mortgage_renewals (
   as_of_date DATE NOT NULL,
   PRIMARY KEY (renewal_id)
 );
-

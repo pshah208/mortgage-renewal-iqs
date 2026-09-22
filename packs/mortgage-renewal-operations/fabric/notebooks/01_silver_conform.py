@@ -31,4 +31,3 @@ for name, source in SOURCE_TABLES.items():
         "overwriteSchema", "true"
     ).saveAsTable(f"silver.{name}")
     print(f"conformed silver.{name}")
-

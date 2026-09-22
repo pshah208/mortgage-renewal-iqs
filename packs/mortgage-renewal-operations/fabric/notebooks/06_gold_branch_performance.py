@@ -32,4 +32,3 @@ branch_product = (
 branch_product.write.format("delta").mode("overwrite").option(
     "overwriteSchema", "true"
 ).saveAsTable("gold.branch_renewal_performance")
-

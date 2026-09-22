@@ -24,4 +24,3 @@ risk_product = (
 risk_product.write.format("delta").mode("overwrite").option(
     "overwriteSchema", "true"
 ).saveAsTable("gold.renewal_risk_summary")
-
