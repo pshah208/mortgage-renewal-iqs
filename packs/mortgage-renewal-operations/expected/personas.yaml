@@ -1,0 +1,147 @@
+schema_version: 1
+personas:
+  - id: renewal-operations-leader
+    function: renewal operations
+    decisions:
+      - Prioritise renewal work across the maturity window
+      - Escalate capacity, ownership, and service-standard breaches
+    questions:
+      - text: >-
+          Which renewals should be prioritized by governed value at risk,
+          and which untouched files are closest to maturity?
+        source_domains:
+          - mortgage_renewals
+          - renewal_risk_scores
+        gold_products:
+          - gold_renewal_portfolio
+          - gold_risk_signal
+      - text: >-
+          Which branch or channel has an ownership or capacity gap, and what
+          exposure does that gap represent?
+        source_domains:
+          - mortgage_renewals
+          - branch_performance
+          - work_iq
+        gold_products:
+          - gold_branch_performance
+          - gold_renewal_portfolio
+
+  - id: branch-leader
+    function: retail distribution
+    decisions:
+      - Sequence advisor outreach within policy
+      - Request capacity or broker-channel ownership support
+    questions:
+      - text: >-
+          Does the renewal queue reflect maturity, value at risk, payment
+          shock, and relationship depth rather than maturity date alone?
+        source_domains:
+          - mortgage_renewals
+          - renewal_risk_scores
+          - work_iq
+        gold_products:
+          - gold_renewal_portfolio
+          - gold_risk_signal
+      - text: >-
+          Which files or cohorts need a named owner without exposing more
+          personal information than the operational task requires?
+        source_domains:
+          - mortgage_renewals
+          - branch_performance
+        gold_products:
+          - gold_branch_performance
+
+  - id: pricing-analyst
+    function: mortgage pricing
+    decisions:
+      - Prepare pricing exception and regional-grid recommendations
+      - Monitor discount evidence, approval, and campaign thresholds
+    questions:
+      - text: >-
+          Which proposed discounts exceed the current authority or evidence
+          threshold, and what approval path applies?
+        source_domains:
+          - retention_offers
+          - renewal_risk_scores
+          - policy_corpus
+        gold_products:
+          - gold_offer_coverage
+      - text: >-
+          Does repeated exception activity indicate a governed regional grid
+          change rather than more individual approvals?
+        source_domains:
+          - work_iq
+          - policy_corpus
+          - branch_performance
+        gold_products:
+          - gold_branch_performance
+
+  - id: credit-risk-officer
+    function: credit risk
+    decisions:
+      - Decide whether an amortization request qualifies for a fast path
+      - Escalate transactions requiring new underwriting
+    questions:
+      - text: >-
+          Which amortization-relief requests meet all straight-renewal
+          conditions, and which require full B-20 testing?
+        source_domains:
+          - mortgage_renewals
+          - policy_corpus
+          - work_iq
+        gold_products:
+          - gold_renewal_portfolio
+      - text: >-
+          How is retained exposure distributed across LTV and payment-shock
+          bands?
+        source_domains:
+          - mortgage_renewals
+          - renewal_risk_scores
+        gold_products:
+          - gold_risk_signal
+
+  - id: compliance-officer
+    function: regulatory compliance
+    decisions:
+      - Determine conduct and disclosure remediation
+      - Approve scripts, handouts, and language-equivalent communications
+    questions:
+      - text: >-
+          Which observed renewal communication or workflow creates a
+          disclosure, fair-treatment, or unlicensed-advice concern?
+        source_domains:
+          - work_iq
+          - policy_corpus
+        gold_products:
+          - gold_work_iq_evidence
+      - text: >-
+          Does a proposed customer communication explain payment change,
+          inaction, terms, and conditions in equivalent language?
+        source_domains:
+          - policy_corpus
+          - work_iq
+        gold_products:
+          - gold_work_iq_evidence
+
+  - id: analytics-lead
+    function: risk analytics
+    decisions:
+      - Explain governed measures and model-derived signals
+      - Validate score version, cutoff, and evidence limitations
+    questions:
+      - text: >-
+          What does Value at Risk mean for this filtered population, and how
+          does it differ from balance and annual revenue exposure?
+        source_domains:
+          - renewal_risk_scores
+          - mortgage_renewals
+        gold_products:
+          - gold_renewal_portfolio
+          - gold_risk_signal
+      - text: >-
+          Is a requested credit or payment-history measure actually present
+          in the governed model?
+        source_domains:
+          - semantic_model
+        gold_products:
+          - gold_renewal_portfolio

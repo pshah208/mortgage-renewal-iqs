@@ -1,0 +1,42 @@
+schema_version: 1
+profiles:
+  default:
+    purpose: >-
+      Fast deterministic demonstration profile large enough to exercise
+      maturity, branch, segment, risk, offer, cutoff, and Work IQ joins.
+    history_days: 365
+    dimensions:
+      customers: 50
+      mortgage_renewals: 50
+      renewal_risk_scores: 50
+      retention_offers: 8
+      branch_performance: 3
+      renewal_work_items: 50
+      work_iq_threads: 12
+      work_iq_messages: 49
+  reference:
+    purpose: >-
+      Reference profile for a regional retail mortgage renewal operation over
+      multiple campaign cycles; counts are cardinality assumptions, not
+      copied production values.
+    history_days: 1826
+    dimensions:
+      customers: 250000
+      mortgage_renewals: 300000
+      renewal_risk_scores: 300000
+      retention_offers: 8
+      branch_performance: 500
+      renewal_work_items: 300000
+      work_iq_threads: 25000
+      work_iq_messages: 150000
+invariants:
+  - Every renewal joins exactly one customer and one compatible risk snapshot.
+  - Risk bands are derived from scores and retain model version and score date.
+  - Every recommended offer exists in the approved catalogue and has an
+    explainable segment and approval path.
+  - Branch and segment totals reconcile to the same cutoff population.
+  - A zero-high-risk branch remains in denominators and is not dropped.
+  - Governed measures use consistent maturity, cutoff, and population filters.
+  - Work IQ statements are dated evidence and never become numeric seed answers.
+  - Customer-facing outputs remain privacy-minimized and de-identified unless
+    an authorized operational task requires file-level detail.

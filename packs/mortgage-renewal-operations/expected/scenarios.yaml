@@ -1,0 +1,107 @@
+scenarios:
+  - key: maturity-prioritization-by-value-at-risk
+    subject_area: renewal operations
+    question: >-
+      Which renewals in the selected maturity window should be prioritized
+      when the queue is sorted by governed Value at Risk rather than maturity
+      date, and which untouched files need an ownership escalation?
+    computed_from:
+      - gold.renewal_portfolio
+      - gold.renewal_risk_summary
+      - postgres.mortgage_renewals
+    evaluation: >-
+      Apply the requested maturity and stage filters, rank by the governed
+      Value at Risk measure, preserve low-risk rows in the population, and
+      identify ownership or service-standard breaches without inventing a
+      contact decision.
+
+  - key: high-risk-versus-exposure
+    subject_area: portfolio risk
+    question: >-
+      Does the highest-risk cohort also carry the greatest annual revenue
+      exposure, and how is retained exposure distributed by LTV and payment
+      shock?
+    computed_from:
+      - gold.renewal_portfolio
+      - gold.renewal_risk_summary
+      - gold.branch_performance
+    evaluation: >-
+      Compare governed risk-band, exposure, and Value at Risk aggregations
+      under the same cutoff, then reconcile LTV and payment-shock bands. The
+      answer must explain any ranking tension rather than equating risk with
+      exposure.
+
+  - key: offer-eligibility-and-approval-boundary
+    subject_area: pricing and retention
+    question: >-
+      Is a proposed retention offer eligible for the segment and within its
+      cap, what evidence is required, and which human role must approve it?
+    computed_from:
+      - snowflake.retention_offers
+      - gold.renewal_portfolio
+      - gold.offer_coverage
+      - knowledge.policies
+    evaluation: >-
+      Join segment and offer parameters, test caps and conditions, identify
+      the highest required authority, and refuse to approve or present the
+      offer. Combined rate and amortization requests must surface the extra
+      sign-off.
+
+  - key: cutoff-safe-renewal-answer
+    subject_area: temporal integrity
+    question: >-
+      What was knowable about the renewal population at a supplied cutoff,
+      and which later facts must be excluded from the answer?
+    computed_from:
+      - postgres.mortgage_renewals
+      - databricks.renewal_risk_scores
+      - work_iq.messages
+    evaluation: >-
+      Filter every source to the cutoff, reject incompatible score dates or
+      missing history, label forward-looking results, and cite the facts and
+      model version actually used.
+
+  - key: score-version-caveat
+    subject_area: model governance
+    question: >-
+      How should the assistant explain a risk ranking when the score version
+      or score date differs from the operational as-of date?
+    computed_from:
+      - databricks.renewal_risk_scores
+      - gold.renewal_portfolio
+      - knowledge.policies
+    evaluation: >-
+      Report the score date and model version, identify stale or incompatible
+      joins, avoid treating a score as observed intent, and route model-use
+      concerns to the accountable risk role.
+
+  - key: privacy-and-disclosure-boundary
+    subject_area: conduct and privacy
+    question: >-
+      Can the assistant provide a file-level renewal summary or customer-facing
+      recommendation for the stated audience, and what must be minimized or
+      referred?
+    computed_from:
+      - gold.renewal_portfolio
+      - knowledge.policies
+      - knowledge.procedures
+    evaluation: >-
+      Classify the audience, minimize identifiers and financial details,
+      refuse individualized advice or binding pricing, and identify required
+      disclosure, compliance review, and human referral.
+
+  - key: work-iq-evidence-reconciliation
+    subject_area: cross-layer operations
+    question: >-
+      A Work IQ source reports a branch capacity, payment-shock, or competitor
+      concern. Does the governed renewal population corroborate it, qualify
+      it, or contradict it?
+    computed_from:
+      - work_iq.messages
+      - work_iq.meetings
+      - gold.renewal_portfolio
+      - gold.branch_performance
+    evaluation: >-
+      Retrieve focused dated evidence, compute the matching governed slice,
+      distinguish observed statements from derived results, and state the
+      disagreement or corroboration with source attribution.
