@@ -1,0 +1,6 @@
+id: mortgage-renewal-operations
+version: "0.1.0"
+sdk_version: "1"
+industry: financial-services
+use_case: mortgage-renewal-retention
+display_name: "Mortgage Renewal Operations"
