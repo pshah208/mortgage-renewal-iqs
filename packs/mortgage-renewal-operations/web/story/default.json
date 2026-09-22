@@ -1,0 +1,116 @@
+{
+  "chapters": [
+    {
+      "id": "decision-criteria",
+      "number": "01",
+      "title": "A renewal recommendation is not a rate approval",
+      "kicker": "The business problem",
+      "takeaway": "Maturity timing, payment shock, competitor gap, relationship depth, branch capacity, privacy, and approval authority shape what a bank can recommend for review.",
+      "durationMs": 12000,
+      "action": "none",
+      "enabled": true
+    },
+    {
+      "id": "connect",
+      "number": "02",
+      "title": "Connect every kind of intelligence to the renewal choice",
+      "kicker": "Microsoft IQ",
+      "takeaway": "People, governed renewal facts, operating guidance, and current public context come together through one governed intelligence platform.",
+      "durationMs": 12000,
+      "action": "none",
+      "enabled": true
+    },
+    {
+      "id": "meet-reviewer",
+      "number": "03",
+      "title": "The renewal team has one review brief to prepare",
+      "kicker": "Meet the decision maker",
+      "takeaway": "A mortgage renewal strategy lead for {{ organization_name }} must turn maturity workload, risk signals, branch capacity, and offer guardrails into a defensible review brief.",
+      "durationMs": 12000,
+      "action": "none",
+      "enabled": true
+    },
+    {
+      "id": "work-context",
+      "number": "04",
+      "title": "Start with what the renewal teams already know",
+      "kicker": "Work IQ",
+      "takeaway": "Meeting notes, executive questions, accountable owners, and unresolved branch or pricing escalations establish the practical decision context before the numbers are read.",
+      "durationMs": 12000,
+      "action": "work",
+      "prompt": "Catch me up before the renewal review. What commitments, executive questions, branch constraints, and approval follow-ups are open for this week?",
+      "enabled": true
+    },
+    {
+      "id": "governed-evidence",
+      "number": "05",
+      "title": "Trace renewal pressure to governed measures",
+      "kicker": "Fabric IQ",
+      "takeaway": "Fabric IQ connects maturity workload, balances, branch capacity, payment shock, derived attrition risk, renewal likelihood, and offer coverage without exposing customer-level details by default.",
+      "durationMs": 12000,
+      "action": "fabric",
+      "prompt": "Using the governed renewal model, where are maturity workload, payment shock, value at risk, and offer coverage creating the most pressure?",
+      "enabled": true
+    },
+    {
+      "id": "policy-guidance",
+      "number": "06",
+      "title": "Apply pricing and approval rules before recommending action",
+      "kicker": "Foundry IQ",
+      "takeaway": "Offer catalogue, pricing, escalation, suitability, privacy, and workflow guidance determine which paths are ready for review and which require escalation.",
+      "durationMs": 12000,
+      "action": "foundry",
+      "prompt": "Before I recommend any retention path, what do our mortgage renewal rules allow, what requires escalation, and who must approve it?",
+      "enabled": true
+    },
+    {
+      "id": "external-context",
+      "number": "07",
+      "title": "Check what changed outside the bank",
+      "kicker": "Web IQ",
+      "takeaway": "Current Canadian mortgage-rate, housing-market, regulatory, and borrower-sentiment signals may change the recommendation or confirm that governed internal evidence is enough.",
+      "durationMs": 12000,
+      "action": "web",
+      "prompt": "Check current public Canadian mortgage, rate, housing, and regulatory context. What could change the renewal recommendation or confirm internal evidence is enough?",
+      "enabled": true
+    },
+    {
+      "id": "recommendation",
+      "number": "08",
+      "title": "Turn evidence into a reviewable renewal brief",
+      "kicker": "Recommendation",
+      "takeaway": "Mortgage Renewal IQ organizes evidence, options, approval owners, confidence, and boundaries so leaders review a scoped recommendation instead of accepting a black-box decision.",
+      "durationMs": 12000,
+      "action": "foundry",
+      "prompt": "Based on the evidence, prepare a renewal review brief: prioritized segments, derived risk signals, offer paths, approval owners, privacy boundaries, and decisions that must remain with authorized humans.",
+      "enabled": true
+    },
+    {
+      "id": "close",
+      "number": "09",
+      "title": "Mortgage Renewal IQ recommends; people decide",
+      "kicker": "What stays human",
+      "takeaway": "The agent may recommend prioritization and retention paths for review, but it must not approve, deny, bind, price, or communicate a mortgage renewal offer; determine affordability, creditworthiness, eligibility, or suitability; treat risk scores as customer intent; or bypass authorized human approval.",
+      "durationMs": 12000,
+      "action": "none",
+      "enabled": true
+    }
+  ],
+  "settings": {
+    "chat": {
+      "title": "Mortgage Renewal IQ",
+      "subtitle": "Ask about renewal workload, derived attrition signals, offer guardrails, branch capacity, and approval ownership",
+      "emptyEyebrow": "Mortgage renewal operations",
+      "emptyTitle": "What renewal pressure needs a human decision?",
+      "emptyDescription": "Connect governed renewal evidence with policies, team context, and current public signals while preserving the privacy and approval boundary.",
+      "composerPlaceholder": "Ask Mortgage Renewal IQ…",
+      "sendLabel": "Send",
+      "starterPrompts": [
+        "Show me the strongest aggregate evidence behind today’s renewal recommendation.",
+        "Which recommended offer paths require approval before anyone acts?",
+        "What public Canadian context could change our renewal review this week?",
+        "Where should the brief be explicit that a human decision is required?"
+      ]
+    }
+  }
+}

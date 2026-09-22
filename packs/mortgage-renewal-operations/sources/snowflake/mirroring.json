@@ -1,0 +1,22 @@
+{
+  "properties": {
+    "source": {
+      "type": "Snowflake",
+      "typeProperties": {
+        "connection": "{{ .CONNECTION_ID }}",
+        "database": "{{ .DATABASE }}"
+      }
+    },
+    "target": {
+      "type": "MountedRelationalDatabase",
+      "typeProperties": {
+        "defaultSchema": "MORTGAGE_REFERENCE",
+        "format": "Delta",
+        "retentionInDays": 1,
+        "enableDeltaChangeDataFeed": false,
+        "lakehousePath": "Files/ingest/snowflake/MORTGAGE_REFERENCE"
+      }
+    },
+    "mountedTables": []
+  }
+}

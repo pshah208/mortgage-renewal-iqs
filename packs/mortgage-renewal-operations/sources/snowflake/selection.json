@@ -1,0 +1,8 @@
+{
+  "schema": "MORTGAGE_REFERENCE",
+  "tables": [
+    {"source_name": "CUSTOMERS", "raw_name": "customers"},
+    {"source_name": "BRANCH_PERFORMANCE", "raw_name": "branch_performance"},
+    {"source_name": "RETENTION_OFFERS", "raw_name": "retention_offers"}
+  ]
+}

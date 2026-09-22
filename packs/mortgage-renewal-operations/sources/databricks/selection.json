@@ -1,0 +1,6 @@
+{
+  "schema": "mortgage_signals",
+  "tables": [
+    {"source_name": "renewal_risk_scores", "raw_name": "renewal_risk_scores"}
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Validate Sources",
+        "type": "TridentNotebook",
+        "dependsOn": [],
+        "typeProperties": {
+          "notebookId": "__VALIDATE_NOTEBOOK_ID__",
+          "workspaceId": "__WORKSPACE_ID__"
+        }
+      },
+      {
+        "name": "Conform Silver",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {"activity": "Validate Sources", "dependencyConditions": ["Succeeded"]}
+        ],
+        "typeProperties": {
+          "notebookId": "__SILVER_NOTEBOOK_ID__",
+          "workspaceId": "__WORKSPACE_ID__"
+        }
+      },
+      {
+        "name": "Gold As Of",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {"activity": "Conform Silver", "dependencyConditions": ["Succeeded"]}
+        ],
+        "typeProperties": {
+          "notebookId": "__GOLD_ASOF_NOTEBOOK_ID__",
+          "workspaceId": "__WORKSPACE_ID__"
+        }
+      },
+      {
+        "name": "Gold Renewal Portfolio",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {"activity": "Gold As Of", "dependencyConditions": ["Succeeded"]}
+        ],
+        "typeProperties": {
+          "notebookId": "__RENEWAL_PORTFOLIO_NOTEBOOK_ID__",
+          "workspaceId": "__WORKSPACE_ID__"
+        }
+      }
+    ]
+  }
+}

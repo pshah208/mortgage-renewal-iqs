@@ -1,0 +1,62 @@
+{
+  "version": "4.0",
+  "settings": {},
+  "model": {
+    "name": "Mortgage Renewal Operations Intelligence",
+    "compatibilityLevel": 1604,
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "tables": [
+      {
+        "name": "Renewal Portfolio",
+        "columns": [
+          {"name": "Renewal ID", "dataType": "string", "sourceColumn": "renewal_id"},
+          {"name": "Risk Score", "dataType": "double", "sourceColumn": "attrition_risk_score"},
+          {"name": "Risk Band", "dataType": "string", "sourceColumn": "attrition_risk_band"},
+          {"name": "Source As Of Date", "dataType": "dateTime", "sourceColumn": "as_of_date"}
+        ],
+        "partitions": [
+          {
+            "name": "Renewal Portfolio",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "renewal_portfolio",
+              "expressionSource": "DirectLake",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Branch Performance",
+        "columns": [
+          {"name": "Branch ID", "dataType": "string", "sourceColumn": "branch_id"},
+          {"name": "High Risk Count", "dataType": "int64", "sourceColumn": "high_risk_count"},
+          {"name": "Source As Of Date", "dataType": "dateTime", "sourceColumn": "as_of_date"}
+        ],
+        "partitions": [
+          {
+            "name": "Branch Performance",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "branch_renewal_performance",
+              "expressionSource": "DirectLake",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "PackSemantics",
+        "value": "source_as_of_date and model_version are retained in gold products"
+      },
+      {
+        "name": "RiskBoundary",
+        "value": "attrition risk is a derived prioritization signal, not a decision"
+      }
+    ]
+  }
+}

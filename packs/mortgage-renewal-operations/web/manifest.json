@@ -1,0 +1,11 @@
+{
+  "story": "story/default.json",
+  "overlay": [
+    "app/page.tsx",
+    "app/analyst",
+    "components/nav/DashboardNav.tsx",
+    "lib/pack",
+    "lib/mortgage-dashboard.server.ts",
+    "public/brand"
+  ]
+}
