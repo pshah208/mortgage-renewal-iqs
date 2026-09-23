@@ -1,0 +1,29 @@
+{
+  "audit_date": "2026-09-15",
+  "trigger": "from-prompt",
+  "genres_run": ["security", "infrastructure"],
+  "genres_skipped": [
+    {"genre": "team", "reason": "Disabled in this bundle"},
+    {"genre": "hosting", "reason": "Disabled in this bundle"}
+  ],
+  "templates_filled": 6,
+  "templates_skipped": [
+    {"template": "access-control.md", "reason": "Not directly relevant to the repo evidence reviewed; the repo delegates authorization to Entra ID and the app registration scripts instead of custom RBAC implementation."},
+    {"template": "authentication.md", "reason": "Filled with the actual OBO and mock-mode findings in the repo."},
+    {"template": "api.md", "reason": "Filled with tenant consent findings from the provisioning scripts."},
+    {"template": "back-end.md", "reason": "Filled with infrastructure maturity findings for the Python FastAPI BFF."},
+    {"template": "front-end.md", "reason": "Filled with the Vite + React + MSAL maturity assessment."},
+    {"template": "executive-summary.md", "reason": "Filled for both security and infrastructure."},
+    {"template": "database.md", "reason": "No direct database layer or credential storage was found in the audited code paths."},
+    {"template": "secure-logging.md", "reason": "No app-level logging or PII emission policy was identified in the code paths reviewed."},
+    {"template": "third-party-dependencies.md", "reason": "The repo uses a narrow dependency set; no direct vulnerable library chain was identified from static inspection."},
+    {"template": "ai.md", "reason": "The project intentionally uses Foundry and AI grounding as a design feature; the audit focused on security boundary and config controls instead of model integrity issues."},
+    {"template": "infrastructure.md", "reason": "Not required beyond the repo-specific backend/frontend observations."},
+    {"template": "ui-security.md", "reason": "No browser-side XSS or CSRF pattern was identified in the reviewed app code."},
+    {"template": "voice.md", "reason": "No voice or IVR surface exists in this repo."},
+    {"template": "mobile.md", "reason": "No mobile app project was present in the reviewed repository."}
+  ],
+  "total_files_scanned": 101,
+  "total_loc": 21285,
+  "exploitation_report": {"written": true, "reason": null}
+}

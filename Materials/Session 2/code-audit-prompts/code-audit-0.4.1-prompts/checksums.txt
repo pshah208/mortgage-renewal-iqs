@@ -1,0 +1,3 @@
+59e7f9da69cd1b8d39afbb7c4a0f7b9b5477ffa6e44722d9a5797fab62e2b1b0  README.txt
+b6ba08950456fe13c9f824f092e432511bfda09537155fe248dba96ba64ef7ed  prompts/entrypoint.md
+0d8e14c993b9b43bde9595e34086eaaed312a15bc37eb3b3e6f5f273e375c757  commands/code-audit.md

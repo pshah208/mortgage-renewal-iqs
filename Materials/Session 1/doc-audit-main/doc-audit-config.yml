@@ -1,0 +1,28 @@
+# doc-audit configuration. All keys optional; defaults are baked into the
+# entrypoint, so this file is only needed to override them.
+
+dimensions:
+  in-code:                 { enabled: true }
+  readme-onboarding:       { enabled: true }
+  architecture-design:     { enabled: true }
+  api-reference:           { enabled: auto }   # auto = include only if an API surface is detected
+  user-developer-guides:   { enabled: true }
+
+scan:
+  exclude-paths: [node_modules, vendor, dist, build, .git, __pycache__, doc-audit]
+  max-files-per-dimension: 40
+
+review:
+  # Scoring is strict and freshness-gated: presence is not credit, and any
+  # dimension containing stale or code-contradicting docs is capped at 3/5.
+  weights:
+    in-code: 27
+    readme-onboarding: 22
+    api-reference: 22
+    architecture-design: 16
+    user-developer-guides: 13
+
+output:
+  directory: doc-audit
+  # doc-audit emits a single report: executive-overview.md (+ metadata json).
+  only-executive-overview: true

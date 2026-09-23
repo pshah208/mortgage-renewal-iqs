@@ -1,0 +1,19 @@
+{
+  "audit_date": "2026-09-15",
+  "trigger": "from-prompt",
+  "dimensions_run": [
+    "in-code",
+    "readme-onboarding",
+    "api-reference",
+    "architecture-design",
+    "user-developer-guides"
+  ],
+  "dimensions_skipped": [],
+  "files_scanned": 128,
+  "primary_languages": [
+    "Python",
+    "TypeScript/React",
+    "Bicep"
+  ],
+  "documentation_health_score": 62
+}
